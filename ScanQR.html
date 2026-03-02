@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV. NAFIHAKA Creative - Absensi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="top-header">
+  <div class="brand">CV. NAFIHAKA Creative</div>
+  <div class="d-flex align-items-center gap-3">
+    <div class="date-info" id="dateDisplay">Rabu, 25 Februari 2026</div>
+    <div class="clock-badge" id="clockDisplay">07:50:40</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+  <div class="row g-3">
+
+    <!-- LEFT: QR SCANNER -->
+    <div class="col-12 col-lg-7">
+      <div class="qr-card">
+        <div class="scan-label">SCAN UNTUK ABSEN</div>
+        <div class="scan-title">Arahkan Kamera ke QR Code</div>
+        <div class="scan-subtitle">QR diperbaharui otomatis setiap 6 detik</div>
+
+        <div class="qr-wrapper">
+          <!-- QR Code generated via qr-server API -->
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=NAFIHAKA-ABSENSI-2026&color=000000&bgcolor=ffffff&margin=0" alt="QR Code">
+        </div>
+
+        <div class="refresh-bar-wrap">
+          <div class="refresh-bar"><div class="refresh-bar-inner"></div></div>
+          <div class="refresh-text">Refresh dalam 2 detik</div>
+        </div>
+      </div>
+
+      <!-- SHIFT INFO -->
+      <div class="shift-card">
+        <div class="row align-items-center g-2">
+          <div class="col-4">
+            <div class="shift-label">Shift Pagi</div>
+            <div class="shift-value">Shift Pagi</div>
+          </div>
+          <div class="col-4">
+            <div class="shift-label">Jam</div>
+            <div class="shift-value">08.00 – 17.00</div>
+          </div>
+          <div class="col-3">
+            <div class="shift-label">Tanggal</div>
+            <div class="shift-value">Rabu, 25 Februari 2026</div>
+          </div>
+          <div class="col-1 text-end">
+            <span class="badge-aktif">AKTIF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: STATS + RECENT SCANS -->
+    <div class="col-12 col-lg-5">
+
+      <!-- REKAP HARI INI -->
+      <div class="rekap-card">
+        <div class="rekap-title">REKAP HARI INI</div>
+        <div class="rekap-subtitle">0 Karyawan</div>
+        <div class="row g-2">
+          <div class="col-6">
+            <div class="stat-box blue">
+              <div class="stat-num blue">221</div>
+              <div class="stat-label">Hadir</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box teal">
+              <div class="stat-num teal">16</div>
+              <div class="stat-label">Izin / Sakit</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box orange">
+              <div class="stat-num orange">10</div>
+              <div class="stat-label">Terlambat</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box red">
+              <div class="stat-num red">221</div>
+              <div class="stat-label">Absen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCAN TERBARU -->
+      <div class="scan-card">
+        <div class="scan-title-bar">SCAN TERBARU</div>
+        <div class="scan-count">0 Karyawan</div>
+
+        <div class="scan-item">
+          <div class="scan-avatar av-green">LN</div>
+          <div class="scan-info">
+            <div class="scan-name">Lailat Ningrum</div>
+            <div class="scan-time">08:42</div>
+          </div>
+          <span class="badge-masuk">MASUK</span>
+        </div>
+
+        <div class="scan-item">
+          <div class="scan-avatar av-orange">LA</div>
+          <div class="scan-info">
+            <div class="scan-name">Lailat Azzahra</div>
+            <div class="scan-time">08:45</div>
+          </div>
+          <span class="badge-keluar">KELUAR</span>
+        </div>
+
+        <div class="scan-item">
+          <div class="scan-avatar av-green">LN</div>
+          <div class="scan-info">
+            <div class="scan-name">Lailat Ningrum</div>
+            <div class="scan-time">09:10</div>
+          </div>
+          <span class="badge-masuk">MASUK</span>
+        </div>
+
+        <div class="scan-item">
+          <div class="scan-avatar av-orange">LA</div>
+          <div class="scan-info">
+            <div class="scan-name">Lailat Azzahra</div>
+            <div class="scan-time">09:25</div>
+          </div>
+          <span class="badge-keluar">KELUAR</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Live clock
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('clockDisplay').textContent = `${h}:${m}:${s}`;
+
+    const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    document.getElementById('dateDisplay').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
