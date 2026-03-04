@@ -1,0 +1,224 @@
+* {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* PANEL KIRI */
+.left-panel {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0dab 0%, #2e1bdf 40%, #4f35f8 70%, #6b55ff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blob dekorasi atas kanan */
+.left-panel::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(111, 85, 255, 0.55) 0%, transparent 70%);
+  top: -120px;
+  right: -160px;
+  pointer-events: none;
+}
+
+/* Blob dekorasi bawah kiri */
+.left-panel::after {
+  content: '';
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46, 27, 223, 0.6) 0%, transparent 70%);
+  bottom: -80px;
+  left: -100px;
+  pointer-events: none;
+}
+
+/* Brand Badge — efek Glassmorphism */
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.15);        /* putih transparan */
+  backdrop-filter: blur(10px);                    /* efek kaca/blur */
+  -webkit-backdrop-filter: blur(10px);            /* support Safari */
+  border: 1px solid rgba(255, 255, 255, 0.25);  /* border kaca */
+  border-radius: 50px;                            /* bentuk kapsul */
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.brand-badge i {
+  font-size: 1.1rem;
+}
+
+/* Hero Title */
+.hero-title {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+
+/* Hero Subtitle */
+.hero-sub {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.hero-sub strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* PANEL KANAN */
+.right-panel {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 0 2rem;
+}
+
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1a1f6e;
+  letter-spacing: -0.5px;
+}
+
+.login-sub {
+  color: #7a7a9d;
+  font-size: 0.95rem;
+}
+
+/* INPUT */
+.input-group-custom {
+  position: relative;
+}
+
+.input-group-custom .input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1.1rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Warna ikon gembok kuning */
+.input-group-custom .icon-lock {
+  color: #e6a817;
+}
+
+.input-group-custom input {
+  padding-left: 50px;
+  padding-right: 48px;
+  height: 56px;
+  border-radius: 14px;
+  border: 1.5px solid #e8e8f0;
+  background: #f5f5fb;
+  font-size: 0.95rem;
+  color: #333;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group-custom input:focus {
+  border-color: #3b29e8;
+  box-shadow: 0 0 0 3px rgba(59, 41, 232, 0.12);
+  background: #fff;
+}
+
+.input-group-custom input::placeholder {
+  color: #bbb;
+}
+
+/* Tombol show/hide password */
+.toggle-password {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 1.05rem;
+  z-index: 3;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.toggle-password:hover {
+  color: #3b29e8;
+}
+
+/* CHEKBOX */
+.form-check-input:checked {
+  background-color: #3b29e8;
+  border-color: #3b29e8;
+}
+
+.form-check-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* TOMBOL MASUK */
+.btn-masuk {
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #2e1bdf, #5b4aff);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 6px 24px rgba(59, 41, 232, 0.35);
+}
+
+.btn-masuk:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(59, 41, 232, 0.45);
+}
+
+.btn-masuk:active {
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 767px) {
+  .left-panel {
+    min-height: 260px;
+    padding: 2.5rem 2rem 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .right-panel {
+    padding: 2rem 0;
+  }
+}
