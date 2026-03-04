@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV. NAFIHAKA Creative – Dashboard Admin</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="dashboard.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOPBAR
+  ════════════════════════════════════════ -->
+  <header id="topbar" class="topbar d-flex align-items-center justify-content-between px-4">
+    <div class="topbar-brand">CV. NAFIHAKA Creative</div>
+    <div class="d-flex align-items-center gap-3">
+      <span id="topbar-date" class="topbar-date"></span>
+      <div id="topbar-clock" class="topbar-clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       LAYOUT WRAPPER
+  ════════════════════════════════════════ -->
+  <div class="layout-wrapper d-flex">
+
+    <!-- ─────────────────────────────────────
+         SIDEBAR
+    ──────────────────────────────────────── -->
+    <aside id="sidebar" class="sidebar d-flex flex-column">
+
+      <!-- Navigasi Utama -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Utama</div>
+        <a href="#" class="sidebar-item active">
+          <i class="bi bi-house-door-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-calendar-check"></i>
+          <span>Absensi Hari Ini</span>
+        </a>
+      </div>
+
+      <hr class="sidebar-divider"/>
+
+      <!-- Navigasi Manajemen -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Manajemen</div>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-check2-circle"></i>
+          <span>Validasi Izin</span>
+          <span class="sidebar-badge ms-auto">10</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Rekap Laporan</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-people"></i>
+          <span>Karyawan</span>
+        </a>
+      </div>
+
+      <!-- User Profile (bawah sidebar) -->
+      <div class="sidebar-footer mt-auto">
+        <div class="user-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Akari Suida</div>
+          <div class="user-role">Adminstrator</div>
+          <div class="user-company">CV. NAFIHAKA Creative</div>
+        </div>
+      </div>
+
+    </aside>
+    <!-- /sidebar -->
+
+    <!-- ─────────────────────────────────────
+         MAIN CONTENT
+    ──────────────────────────────────────── -->
+    <main class="main-content flex-grow-1">
+
+      <!-- ── Ringkasan Kehadiran ── -->
+      <section class="summary-card mb-4">
+        <h5 class="summary-title">Ringkasan Kehadiran Hari Ini</h5>
+        <div class="row g-3">
+
+          <!-- Hadir -->
+          <div class="col-6 col-md-3">
+            <div class="stat-box hadir">
+              <div class="stat-top">
+                <i class="bi bi-check-square-fill stat-icon"></i>
+                <span class="stat-number" id="stat-hadir">221</span>
+              </div>
+              <div class="stat-label">Total Hadir</div>
+            </div>
+          </div>
+
+          <!-- Terlambat -->
+          <div class="col-6 col-md-3">
+            <div class="stat-box lambat">
+              <div class="stat-top">
+                <i class="bi bi-clock-history stat-icon"></i>
+                <span class="stat-number" id="stat-lambat">36</span>
+              </div>
+              <div class="stat-label">Terlambat</div>
+            </div>
+          </div>
+
+          <!-- Tidak Hadir -->
+          <div class="col-6 col-md-3">
+            <div class="stat-box absen">
+              <div class="stat-top">
+                <i class="bi bi-x-circle-fill stat-icon"></i>
+                <span class="stat-number" id="stat-absen">12</span>
+              </div>
+              <div class="stat-label">Tidak Hadir</div>
+            </div>
+          </div>
+
+          <!-- Izin Pending -->
+          <div class="col-6 col-md-3">
+            <div class="stat-box izin">
+              <div class="stat-top">
+                <i class="bi bi-file-earmark-text stat-icon"></i>
+                <span class="stat-number" id="stat-izin">10</span>
+              </div>
+              <div class="stat-label">Izin Pending</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Charts Row ── -->
+      <div class="row g-4">
+
+        <!-- Grafik Bar Mingguan -->
+        <div class="col-12 col-lg-6">
+          <div class="chart-card h-100">
+            <div class="chart-card-title">Grafik Kehadiran Mingguan</div>
+            <div class="chart-wrapper">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grafik Donut -->
+        <div class="col-12 col-lg-6">
+          <div class="chart-card h-100">
+            <div class="chart-card-title">Kehadiran Hari Ini</div>
+            <div class="donut-wrap">
+              <!-- Canvas -->
+              <div class="donut-container">
+                <canvas id="donutChart"></canvas>
+                <div class="donut-center-label">
+                  <span class="donut-pct">75%</span>
+                  <span class="donut-sub">Hadir</span>
+                </div>
+              </div>
+              <!-- Legend -->
+              <div class="donut-legend">
+                <div class="legend-item">
+                  <div class="legend-label-row">
+                    <span class="legend-name">Hadir</span>
+                    <div class="legend-bar hadir-bar"></div>
+                  </div>
+                  <div class="legend-count">221 Orang</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-label-row">
+                    <span class="legend-name">Terlambat</span>
+                    <div class="legend-bar lambat-bar"></div>
+                  </div>
+                  <div class="legend-count">36 Orang</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-label-row">
+                    <span class="legend-name">Tidak Hadir</span>
+                    <div class="legend-bar absen-bar"></div>
+                  </div>
+                  <div class="legend-count">12 Orang</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /charts row -->
+
+    </main>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /layout-wrapper -->
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <!-- Custom JS -->
+  <script src="dashboard.js"></script>
+</body>
+</html>
