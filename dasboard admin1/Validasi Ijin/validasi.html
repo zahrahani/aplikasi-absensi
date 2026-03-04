@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Validasi Izin – CV. NAFIHAKA Creative</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="validasi.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOPBAR
+  ════════════════════════════════════════ -->
+  <header class="topbar d-flex align-items-center justify-content-between px-4">
+    <div class="topbar-brand">CV. NAFIHAKA Creative</div>
+    <div class="d-flex align-items-center gap-3">
+      <span id="topbar-date" class="topbar-date"></span>
+      <div id="topbar-clock" class="topbar-clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       LAYOUT WRAPPER
+  ════════════════════════════════════════ -->
+  <div class="layout-wrapper d-flex">
+
+    <!-- ─────────────────────────────────────
+         SIDEBAR
+    ──────────────────────────────────────── -->
+    <aside class="sidebar d-flex flex-column">
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Utama</div>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-house-door-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-calendar-check"></i>
+          <span>Absensi Hari Ini</span>
+        </a>
+      </div>
+
+      <hr class="sidebar-divider"/>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Manajemen</div>
+        <a href="#" class="sidebar-item active">
+          <i class="bi bi-check2-circle"></i>
+          <span>Validasi Izin</span>
+          <span class="sidebar-badge ms-auto" id="badge-count">10</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Rekap Laporan</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-people"></i>
+          <span>Karyawan</span>
+        </a>
+      </div>
+
+      <!-- User Footer -->
+      <div class="sidebar-footer mt-auto">
+        <div class="user-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Akari Suida</div>
+          <div class="user-role">Adminstrator</div>
+          <div class="user-company">CV. NAFIHAKA Creative</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ─────────────────────────────────────
+         MAIN CONTENT
+    ──────────────────────────────────────── -->
+    <main class="main-content flex-grow-1">
+
+      <!-- Page Header -->
+      <div class="page-header mb-4">
+        <h4 class="page-title">Validasi Pengajuan Izin</h4>
+        <p class="page-subtitle" id="subtitle-count">10 Pengajuan menunggu persetujuan</p>
+
+        <!-- Toolbar: Search + Filter + Bulk Actions -->
+        <div class="toolbar d-flex flex-wrap align-items-center gap-2 mt-3">
+
+          <!-- Search -->
+          <div class="search-box d-flex align-items-center">
+            <i class="bi bi-search search-icon"></i>
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Cari Pengajuan...."
+            />
+          </div>
+
+          <!-- Filter Jenis -->
+          <div class="dropdown">
+            <button
+              class="btn-filter dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="filterLabel"
+            >
+              Semua Jenis
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item filter-option" data-value="semua" href="#">Semua Jenis</a></li>
+              <li><a class="dropdown-item filter-option" data-value="sakit" href="#">Sakit</a></li>
+              <li><a class="dropdown-item filter-option" data-value="cuti" href="#">Cuti</a></li>
+              <li><a class="dropdown-item filter-option" data-value="dinas" href="#">Dinas Luar</a></li>
+              <li><a class="dropdown-item filter-option" data-value="keperluan" href="#">Keperluan Pribadi</a></li>
+            </ul>
+          </div>
+
+          <!-- Bulk Actions -->
+          <div class="ms-auto d-flex gap-2">
+            <button class="btn-bulk-tolak" id="btnTolakSemua">
+              <i class="bi bi-x-lg"></i> Tolak Semua
+            </button>
+            <button class="btn-bulk-setujui" id="btnSetujuiSemua">
+              <i class="bi bi-check2-square"></i> Setujui Semua
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Daftar Kartu Pengajuan ── -->
+      <div id="pengajuan-list">
+        <!-- Kartu pengajuan dirender oleh JS -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state d-none">
+        <i class="bi bi-inbox empty-icon"></i>
+        <p class="empty-text">Tidak ada pengajuan yang ditemukan</p>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL KONFIRMASI
+  ════════════════════════════════════════ -->
+  <div class="modal fade" id="modalKonfirmasi" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-custom">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="modalLabel">Konfirmasi Aksi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-message">Apakah Anda yakin?</p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn-modal-batal" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn-modal-konfirm" id="btnKonfirmAksi">Ya, Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="validasi.js"></script>
+</body>
+</html>
