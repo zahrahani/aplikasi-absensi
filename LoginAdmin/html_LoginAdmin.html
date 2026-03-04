@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Admin - CV. NAFIHAKA Creative</title>
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+     <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css_LoginAdmin.css"/>
+  </head>
+  <body>
+
+  <div class="container-fluid p-8">
+    <div class="row g-8">
+      
+      <!-- PANEL KIRI -->
+      <div class="col-12 col-md-7 left-panel d-flex flex-column justify-content-between p-5">
+
+      <!-- Brand Badge -->
+      <div>
+        <div class="brand-badge">
+          <i class="bi bi-building"></i>
+          CV. NAFIHAKA Creative
+        </div>
+      </div>
+
+      <!-- Hero Text -->
+      <div class="pb-3">
+        <h1 class="hero-title mb-3">Selamat<br>Datang.</h1>
+        <p class="hero-sub mb-0">
+          Catat kehadiran hanya dengan <strong>sekali pindai</strong>
+        </p>
+      </div>
+
+      <!-- Spacer -->
+      <div></div>
+    </div>
+
+    <!-- PANEL KANAN -->
+    <div class="col-12 col-md-5 right-panel">
+      <div class="login-card">
+
+        <h2 class="login-title mb-1">Login Sekarang</h2>
+        <p class="login-sub mb-5">Isi data di bawah ini untuk melanjutkan</p>
+
+        <form>
+          <!-- NIP -->
+          <div class="mb-3">
+            <div class="input-group-custom">
+              <i class="bi bi-person-fill input-icon"></i>
+              <input
+                type="text"
+                class="form-control"
+                id="nip"
+                placeholder="Masukkan NIP"
+                autocomplete="username"
+              />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <div class="input-group-custom">
+              <i class="bi bi-lock-fill input-icon icon-lock"></i>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Masukkan Password"
+                autocomplete="current-password"
+              />
+              <button type="button" class="toggle-password" id="togglePass" tabindex="-1">
+                <i class="bi bi-eye-slash" id="eyeIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ingat Saya -->
+          <div class="form-check mb-5">
+            <input class="form-check-input" type="checkbox" id="rememberMe"/>
+            <label class="form-check-label" for="rememberMe">Ingat Saya</label>
+          </div>
+
+          <!-- Masuk -->
+          <button type="submit" class="btn btn-masuk w-100">
+            Masuk
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="js_LoginAdmin.js"></script>
+    
+  </body>
+</html>
