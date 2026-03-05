@@ -1,6 +1,3 @@
-/* ═══════════════════════════════════════════
-   CUSTOM PROPERTIES
-════════════════════════════════════════════ */
 :root {
   --navy:      #2A2FA8;
   --navy-dark: #1e2280;
@@ -16,9 +13,8 @@
   --topbar-h:  56px;
 }
 
-/* ═══════════════════════════════════════════
-   BASE
-════════════════════════════════════════════ */
+/*    BASE
+ */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -32,9 +28,8 @@ html, body {
   padding: 0;
 }
 
-/* ═══════════════════════════════════════════
-   TOPBAR
-════════════════════════════════════════════ */
+/*    TOPBAR
+ */
 .topbar {
   position: fixed;
   top: 0;
@@ -70,17 +65,15 @@ html, body {
   letter-spacing: 0.05em;
 }
 
-/* ═══════════════════════════════════════════
-   LAYOUT WRAPPER
-════════════════════════════════════════════ */
+/*    LAYOUT WRAPPER
+ */
 .layout-wrapper {
   padding-top: var(--topbar-h);
   min-height: 100vh;
 }
 
-/* ═══════════════════════════════════════════
-   SIDEBAR
-════════════════════════════════════════════ */
+/*    SIDEBAR
+ */
 .sidebar {
   width: var(--sidebar-w);
   min-height: calc(100vh - var(--topbar-h));
@@ -220,18 +213,16 @@ html, body {
   font-weight: 600;
 }
 
-/* ═══════════════════════════════════════════
-   MAIN CONTENT
-════════════════════════════════════════════ */
+/*    MAIN CONTENT
+ */
 .main-content {
   margin-left: var(--sidebar-w);
   padding: 28px 28px 40px;
   animation: fadeUp 0.45s ease both;
 }
 
-/* ═══════════════════════════════════════════
-   SUMMARY CARD
-════════════════════════════════════════════ */
+/*    SUMMARY CARD
+ */
 .summary-card {
   background: var(--white);
   border: 2px solid var(--navy);
@@ -299,9 +290,8 @@ html, body {
 .stat-box.izin   .stat-number,
 .stat-box.izin   .stat-icon  { color: var(--navy); }
 
-/* ═══════════════════════════════════════════
-   CHART CARDS
-════════════════════════════════════════════ */
+/*    CHART CARDS
+ */
 .chart-card {
   background: var(--white);
   border-radius: 14px;
@@ -328,9 +318,8 @@ html, body {
   width: 100%;
 }
 
-/* ═══════════════════════════════════════════
-   DONUT CHART
-════════════════════════════════════════════ */
+/*    DONUT CHART
+ */
 .donut-wrap {
   display: flex;
   align-items: center;
@@ -409,9 +398,8 @@ html, body {
   font-weight: 500;
 }
 
-/* ═══════════════════════════════════════════
-   ANIMATIONS
-════════════════════════════════════════════ */
+/*    ANIMATIONS
+ */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -423,9 +411,8 @@ html, body {
   }
 }
 
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════════ */
+/*    RESPONSIVE
+ */
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;

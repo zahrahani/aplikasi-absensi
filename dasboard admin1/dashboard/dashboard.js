@@ -1,20 +1,19 @@
-/* ═══════════════════════════════════════════
-   dashboard.js – CV. NAFIHAKA Creative
-   Berisi: Clock, Bar Chart, Donut Chart
-════════════════════════════════════════════ */
-
+// Mengkatifkan mode ECMAScript 5+ agar penulisan kode pada javascript lebih ketat
 'use strict';
 
-// ─────────────────────────────────────────────
 // 1. REAL-TIME CLOCK & DATE
-// ─────────────────────────────────────────────
+// Deklarasi konstanta hari untuk menampilkan hari
 const HARI   = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+// Deklarasi konstanta bulan untuk menampilkan bulan
 const BULAN  = [
   'Januari','Februari','Maret','April','Mei','Juni',
   'Juli','Agustus','September','Oktober','November','Desember'
 ];
 
+
+// Fungsi untuk update jam atau DateTimePicker
 function updateClock() {
+  // Deklarasi
   const now  = new Date();
   const pad  = (n) => String(n).padStart(2, '0');
 
@@ -31,9 +30,8 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-// ─────────────────────────────────────────────
 // 2. DATA KEHADIRAN
-// ─────────────────────────────────────────────
+
 const dataMingguan = {
   labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'],
   hadir:   [230, 218, 221, 225, 210],
@@ -48,9 +46,9 @@ const dataHariIni = {
 };
 
 
-// ─────────────────────────────────────────────
+
 // 3. BAR CHART – Kehadiran Mingguan
-// ─────────────────────────────────────────────
+
 (function initBarChart() {
   const ctx = document.getElementById('barChart').getContext('2d');
 
@@ -126,9 +124,7 @@ const dataHariIni = {
 })();
 
 
-// ─────────────────────────────────────────────
 // 4. DONUT CHART – Kehadiran Hari Ini
-// ─────────────────────────────────────────────
 (function initDonutChart() {
   const ctx = document.getElementById('donutChart').getContext('2d');
 
@@ -178,9 +174,7 @@ const dataHariIni = {
 })();
 
 
-// ─────────────────────────────────────────────
 // 5. SIDEBAR ACTIVE STATE (klik navigasi)
-// ─────────────────────────────────────────────
 document.querySelectorAll('.sidebar-item').forEach((item) => {
   item.addEventListener('click', function (e) {
     e.preventDefault();
