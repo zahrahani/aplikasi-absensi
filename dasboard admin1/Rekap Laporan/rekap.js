@@ -1,34 +1,42 @@
-/* ═══════════════════════════════════════════
-   rekap.js – CV. NAFIHAKA Creative
-   Fitur: Clock, Data, Render Tabel, Search,
-          Filter Bulan & Divisi, Pagination,
-          Modal Detail, Export PDF (print)
-════════════════════════════════════════════ */
-
+// Mengkatifkan mode ECMAScript 5+ agar penulisan kode pada javascript lebih ketat
 'use strict';
 
-// ─────────────────────────────────────────────
 // 1. REAL-TIME CLOCK & DATE
-// ─────────────────────────────────────────────
-const HARI  = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-const BULAN = ['Januari','Februari','Maret','April','Mei','Juni',
-               'Juli','Agustus','September','Oktober','November','Desember'];
+// Deklarasi konstanta hari untuk menampilkan hari
+const HARI   = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+// Deklarasi konstanta bulan untuk menampilkan bulan
+const BULAN  = [
+  'Januari','Februari','Maret','April','Mei','Juni',
+  'Juli','Agustus','September','Oktober','November','Desember'
+];
 
+
+// Fungsi untuk update jam atau DateTimePicker
 function updateClock() {
-  const now = new Date();
-  const pad = (n) => String(n).padStart(2, '0');
-  document.getElementById('topbar-clock').textContent =
-    `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-  document.getElementById('topbar-date').textContent =
-    `${HARI[now.getDay()]}, ${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
+  // instansi objek Date untuk mendapatkan tanggal
+  const now  = new Date();
+
+  // Mulai menambahkan angka 0 setiap 1 digit dengan batas maksimal 2 karakter. Contoh 8 => 08 atau 22 => 22
+  const pad  = (n) => String(n).padStart(2, '0');
+
+  // Menambahkan Jam
+  const jam = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  document.getElementById('topbar-clock').textContent = jam;
+
+  // Menambahkan Tanggal
+  const tgl = `${HARI[now.getDay()]}, ${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById('topbar-date').textContent = tgl;
 }
+
+// Jalankan fungsi updateClock
 updateClock();
+
+// Menjalankan fungsi updateClock setiap 1000 milidetik sekali
 setInterval(updateClock, 1000);
 
 
-// ─────────────────────────────────────────────
 // 2. DATA KARYAWAN
-// ─────────────────────────────────────────────
+// Menyiapkan data dummy karian dalam bentuk dictionary
 const dataKaryawan = [
   { id:1,  nama:'Karezu Shiro',   nip:'EM001', divisi:'HRD',        hadir:16, terlambat:1, izin:2, absen:0, pct:84 },
   { id:2,  nama:'Rania Putri',    nip:'EM002', divisi:'Marketing',  hadir:18, terlambat:2, izin:1, absen:0, pct:90 },
@@ -52,18 +60,21 @@ const dataKaryawan = [
   { id:20, nama:'Wulandari',      nip:'EM020', divisi:'Marketing',  hadir:17, terlambat:1, izin:2, absen:0, pct:88 },
 ];
 
-// ─────────────────────────────────────────────
 // 3. STATE
-// ─────────────────────────────────────────────
+// State awal berfungsi untuk menetapkan data awal rekap
+// Bulan dimulai dari februari 2026
 let filterBulan  = 'Februari 2026';
+// Divisi yang di tampilkan semuanya
 let filterDivisi = 'semua';
+// Belum ada query pencarian
 let searchQuery  = '';
+// Dimulai dari halaman pertama
 let currentPage  = 1;
+// Setiap data perhalaman 8
 const perPage    = 8;
 
-// ─────────────────────────────────────────────
 // 4. HELPERS
-// ─────────────────────────────────────────────
+// Berfungsi untuk mengatur class dari avatarnya guna membedakan css setiap avatar antar divisi
 function getAvatarClass(divisi) {
   const map = {
     HRD:        'avatar-hrd',
@@ -77,36 +88,48 @@ function getAvatarClass(divisi) {
   return map[divisi] || 'avatar-hrd';
 }
 
+// Berfungsi menyiptakan inisial dari nama
 function getInisial(nama) {
+  // Membagi 2 string mengambil kata pertama lalu memotong string menjadi 2 karakter dan mengembalikan dalam huruf kapital
   return nama.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
 }
 
+// Berfungsi untuk mengatur tulisan persentase kehadiran
 function getPctClass(pct) {
+  // jika >= 90 diberi class pct-high
   if (pct >= 90) return 'pct-high';
+  // jika >= 75 diberi class pct-medium
   if (pct >= 75) return 'pct-medium';
+  // jika tidak memenuhi kedua itu diberikan class pct-low
   return 'pct-low';
 }
 
+// Berfungsi untuk membantu dalam query pencarian
 function getFiltered() {
+  // dari data dummy diberikan difilter
   return dataKaryawan.filter(k => {
+    // filter divisi
     const matchDiv  = filterDivisi === 'semua' || k.divisi === filterDivisi;
+    // Filter pencarian berdasarkan nama divisi dan nip
     const matchSrc  = k.nama.toLowerCase().includes(searchQuery) ||
                       k.nip.toLowerCase().includes(searchQuery)  ||
                       k.divisi.toLowerCase().includes(searchQuery);
+    // Mengembalikan hasil filter dari pencarian divisi dan pencarian berdasarkan query
     return matchDiv && matchSrc;
   });
 }
 
-// ─────────────────────────────────────────────
 // 5. RENDER TABEL
-// ─────────────────────────────────────────────
+// Render tabel untuk menampilkan seluruh data karyawan
 function renderTabel() {
+  // Mendapatkan elemen tabel yang nantinya akan di isi
   const tbody      = document.getElementById('table-body');
   const emptyState = document.getElementById('empty-state');
   const filtered   = getFiltered();
-
+  // Mengosongkan table
   tbody.innerHTML = '';
 
+  // Jika data karyawan kosong maka akan menampilkan bahwa tabel kosong
   if (filtered.length === 0) {
     emptyState.classList.remove('d-none');
     document.getElementById('pagination-info').textContent = '';
@@ -116,15 +139,22 @@ function renderTabel() {
   emptyState.classList.add('d-none');
 
   // Pagination slice
+  // Mengatur pagination untuk membatasi jumlah data karyawan per halaman
+  // jumlah halaman adalah jumlah data dibagi total data perhalaman
   const totalPages = Math.ceil(filtered.length / perPage);
+  // jika halaman sekarang lebih besar dari total halaman maka kembali ke halman pertama
   if (currentPage > totalPages) currentPage = 1;
 
+  // total index mulai dari halman sekarang dikurang 1 dikali total perhalaman
   const start = (currentPage - 1) * perPage;
+  // memotong seluruh data karyawan dan hanya menampilkan dari awal index mulai sampai index terakhir setiap batas halaman
   const slice = filtered.slice(start, start + perPage);
-
+  // menampilkan isi dari data karyawan yang sudah dipotong
   slice.forEach((k, idx) => {
+    // membuat element <tr>
     const tr = document.createElement('tr');
     tr.style.animationDelay = `${idx * 0.04}s`;
+    // mengisi table tr
     tr.innerHTML = `
       <td>
         <div class="karyawan-cell">
@@ -147,6 +177,7 @@ function renderTabel() {
         </button>
       </td>
     `;
+    // element yang dibuat di tambahkan menjadi anak dari elemen tbody untuk ditampilkan
     tbody.appendChild(tr);
   });
 
@@ -154,30 +185,36 @@ function renderTabel() {
   document.getElementById('pagination-info').textContent =
     `Menampilkan ${start + 1}–${Math.min(start + perPage, filtered.length)} dari ${filtered.length} karyawan`;
 
+  // menampilkan html dan css dari pagination
   renderPagination(totalPages);
 
   // Event tombol detail
   tbody.querySelectorAll('.btn-open-detail').forEach(btn => {
+    // jika tombol detail di klik maka akan membuka modal
     btn.addEventListener('click', () => bukaModalDetail(parseInt(btn.dataset.id)));
   });
 }
 
-// ─────────────────────────────────────────────
 // 6. PAGINATION
-// ─────────────────────────────────────────────
+// berfungsi untuk menampilkan keterangan pagination
 function renderPagination(totalPages) {
+  // mendapatkan container dari pagination
   const container = document.getElementById('pagination-btns');
   container.innerHTML = '';
 
   // Prev
+  // berfungsi untuk mengatur tombol previous
   const btnPrev = document.createElement('button');
   btnPrev.className = 'btn-page';
   btnPrev.innerHTML = '<i class="bi bi-chevron-left"></i>';
   btnPrev.disabled = currentPage === 1;
+  // jika tombol previous di klik maka akan pindah ke halman sebelumnya
   btnPrev.addEventListener('click', () => { currentPage--; renderTabel(); });
+  // menampilkan tombol previous dengan menjadikan anak dari container pagination
   container.appendChild(btnPrev);
 
   // Page numbers
+  // Berfungsi untuk mengatur penomoran pagination
   for (let i = 1; i <= totalPages; i++) {
     const btn = document.createElement('button');
     btn.className = `btn-page${i === currentPage ? ' active' : ''}`;
@@ -187,23 +224,28 @@ function renderPagination(totalPages) {
   }
 
   // Next
+  // berfungsi untuk mengatur tombol next
   const btnNext = document.createElement('button');
   btnNext.className = 'btn-page';
   btnNext.innerHTML = '<i class="bi bi-chevron-right"></i>';
   btnNext.disabled = currentPage === totalPages;
+  // jika tombol next di klik maka akan pindah ke halamn selanjutnya
   btnNext.addEventListener('click', () => { currentPage++; renderTabel(); });
+  // menampilkan tombol next dengan menjadikan anak dari container pagination                   
   container.appendChild(btnNext);
 }
 
-// ─────────────────────────────────────────────
 // 7. MODAL DETAIL
-// ─────────────────────────────────────────────
+// Mendapatkan melemen modal detail dari bootstrap
 const bsModalDetail = new bootstrap.Modal(document.getElementById('modalDetail'));
 
+// berfungsi membuka modal detail
 function bukaModalDetail(id) {
+  // mendapatakan data karyawan
   const k = dataKaryawan.find(x => x.id === id);
+  // jika ternyata data karyawan tidak ada maka tidak mengembalikan apa apa
   if (!k) return;
-
+  // jika ada maka akan menampilkan sega informasi dari karyawan
   document.getElementById('modalDetailLabel').textContent = `Detail Kehadiran – ${k.nama}`;
 
   document.getElementById('modal-detail-body').innerHTML = `
@@ -265,12 +307,11 @@ function bukaModalDetail(id) {
     </div>
   `;
 
+  // menampilkan modal detail
   bsModalDetail.show();
 }
 
-// ─────────────────────────────────────────────
 // 8. FILTER BULAN
-// ─────────────────────────────────────────────
 document.querySelectorAll('.filter-bulan').forEach(item => {
   item.addEventListener('click', function (e) {
     e.preventDefault();
@@ -282,9 +323,7 @@ document.querySelectorAll('.filter-bulan').forEach(item => {
   });
 });
 
-// ─────────────────────────────────────────────
 // 9. FILTER DIVISI
-// ─────────────────────────────────────────────
 document.querySelectorAll('.filter-divisi').forEach(item => {
   item.addEventListener('click', function (e) {
     e.preventDefault();
@@ -295,25 +334,19 @@ document.querySelectorAll('.filter-divisi').forEach(item => {
   });
 });
 
-// ─────────────────────────────────────────────
 // 10. SEARCH
-// ─────────────────────────────────────────────
 document.getElementById('searchInput').addEventListener('input', function () {
   searchQuery = this.value.toLowerCase().trim();
   currentPage = 1;
   renderTabel();
 });
 
-// ─────────────────────────────────────────────
 // 11. EXPORT PDF (print halaman)
-// ─────────────────────────────────────────────
 document.getElementById('btnExport').addEventListener('click', () => {
   window.print();
 });
 
-// ─────────────────────────────────────────────
 // 12. SIDEBAR ACTIVE STATE
-// ─────────────────────────────────────────────
 document.querySelectorAll('.sidebar-item').forEach(item => {
   item.addEventListener('click', function (e) {
     e.preventDefault();
@@ -322,7 +355,5 @@ document.querySelectorAll('.sidebar-item').forEach(item => {
   });
 });
 
-// ─────────────────────────────────────────────
 // 13. INIT
-// ─────────────────────────────────────────────
 renderTabel();

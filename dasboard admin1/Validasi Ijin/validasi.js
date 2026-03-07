@@ -1,33 +1,39 @@
-/* ═══════════════════════════════════════════
-   validasi.js – CV. NAFIHAKA Creative
-   Fitur: Clock, Render Kartu, Search, Filter,
-          Tolak/Setujui per kartu, Bulk Aksi, Modal
-════════════════════════════════════════════ */
-
+// Mengkatifkan mode ECMAScript 5+ agar penulisan kode pada javascript lebih ketat
 'use strict';
 
-// ─────────────────────────────────────────────
 // 1. REAL-TIME CLOCK & DATE
-// ─────────────────────────────────────────────
+// Deklarasi konstanta hari untuk menampilkan hari
 const HARI  = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+// Deklarasi konstanta bulan untuk menampilkan bulan
 const BULAN = ['Januari','Februari','Maret','April','Mei','Juni',
                'Juli','Agustus','September','Oktober','November','Desember'];
 
+// Fungsi untuk update jam atau DateTimePicker
 function updateClock() {
+  // instansi objek Date untuk mendapatkan tanggal
   const now = new Date();
+
+  // Mulai menambahkan angka 0 setiap 1 digit dengan batas maksimal 2 karakter. Contoh 8 => 08 atau 22 => 22
   const pad = (n) => String(n).padStart(2, '0');
+
+  // Menambahkan Jam
   document.getElementById('topbar-clock').textContent =
     `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+  // Menambahkan Tanggal
   document.getElementById('topbar-date').textContent =
     `${HARI[now.getDay()]}, ${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
 }
+
+// Jalankan fungsi updateClock
 updateClock();
+
+// Menjalankan fungsi updateClock setiap 1000 milidetik sekali
 setInterval(updateClock, 1000);
 
 
-// ─────────────────────────────────────────────
 // 2. DATA PENGAJUAN IZIN
-// ─────────────────────────────────────────────
+// Menyiapkan data dummy pengajuan izin dalam bentuk array object
 let dataPengajuan = [
   {
     id: 1,
@@ -71,117 +77,20 @@ let dataPengajuan = [
     alasan: '" Pertemuan klien di Jakarta untuk presentasi proyek baru"',
     status: 'pending',
   },
-  {
-    id: 4,
-    nama: 'Siti Aulia',
-    inisial: 'SA',
-    dept: 'Finance – Accounting Staff',
-    waktu: '1 hari lalu',
-    jenis: 'keperluan',
-    urgent: false,
-    tanggal: '27 Feb 2026',
-    durasi: '1 Hari',
-    lampiran: null,
-    alasan: '" Mengurus administrasi kependudukan yang sudah mendesak"',
-    status: 'pending',
-  },
-  {
-    id: 5,
-    nama: 'Budi Santoso',
-    inisial: 'BS',
-    dept: 'Operations – Logistics',
-    waktu: '1 hari lalu',
-    jenis: 'sakit',
-    urgent: false,
-    tanggal: '25 Feb 2026',
-    durasi: '1 Hari',
-    lampiran: 'Surat Dokter',
-    alasan: '" Flu berat disertai batuk, disarankan dokter untuk istirahat"',
-    status: 'pending',
-  },
-  {
-    id: 6,
-    nama: 'Hana Wijaya',
-    inisial: 'HW',
-    dept: 'Design – UI/UX Designer',
-    waktu: '2 hari lalu',
-    jenis: 'cuti',
-    urgent: false,
-    tanggal: '1 – 3 Mar 2026',
-    durasi: '3 Hari',
-    lampiran: 'Formulir Cuti',
-    alasan: '" Liburan tahunan yang sudah direncanakan sejak lama"',
-    status: 'pending',
-  },
-  {
-    id: 7,
-    nama: 'Ahmad Fauzi',
-    inisial: 'AF',
-    dept: 'Sales – Account Manager',
-    waktu: '2 hari lalu',
-    jenis: 'dinas',
-    urgent: true,
-    tanggal: '26 – 27 Feb 2026',
-    durasi: '2 Hari',
-    lampiran: 'Surat Tugas',
-    alasan: '" Kunjungan klien prioritas di Surabaya untuk negosiasi kontrak"',
-    status: 'pending',
-  },
-  {
-    id: 8,
-    nama: 'Maya Lestari',
-    inisial: 'ML',
-    dept: 'HR – Recruitment Staff',
-    waktu: '3 hari lalu',
-    jenis: 'sakit',
-    urgent: false,
-    tanggal: '25 Feb 2026',
-    durasi: '1 Hari',
-    lampiran: 'Surat Dokter',
-    alasan: '" Migrain berat, tidak bisa bekerja di depan layar"',
-    status: 'pending',
-  },
-  {
-    id: 9,
-    nama: 'Rizki Maulana',
-    inisial: 'RM',
-    dept: 'IT – Backend Developer',
-    waktu: '3 hari lalu',
-    jenis: 'keperluan',
-    urgent: false,
-    tanggal: '28 Feb 2026',
-    durasi: '1 Hari',
-    lampiran: null,
-    alasan: '" Acara pernikahan saudara di luar kota"',
-    status: 'pending',
-  },
-  {
-    id: 10,
-    nama: 'Dewi Kartika',
-    inisial: 'DK',
-    dept: 'Finance – Tax Consultant',
-    waktu: '4 hari lalu',
-    jenis: 'cuti',
-    urgent: false,
-    tanggal: '2 – 4 Mar 2026',
-    durasi: '3 Hari',
-    lampiran: 'Formulir Cuti',
-    alasan: '" Istirahat tahunan sesuai hak cuti yang belum diambil"',
-    status: 'pending',
-  },
 ];
 
-// State filter & search
+// 3. STATE
+// State awal berfungsi untuk menetapkan kondisi awal filter dan pencarian
+// Filter jenis izin dimulai dari semua
 let filterAktif = 'semua';
+// Belum ada query pencarian
 let searchQuery = '';
-
-// State modal
+// State modal digunakan untuk menyimpan aksi yang akan dijalankan
 let pendingAction = null; // { type: 'tolak'|'setujui'|'tolakSemua'|'setujuiSemua', id? }
 
+// 4. HELPERS
 
-// ─────────────────────────────────────────────
-// 3. HELPERS
-// ─────────────────────────────────────────────
+// Deklarasi konstanta label jenis izin dalam bentuk objek
 const LABEL_JENIS = {
   sakit:     'Sakit',
   cuti:      'Cuti',
@@ -189,54 +98,77 @@ const LABEL_JENIS = {
   keperluan: 'Keperluan Pribadi',
 };
 
+// Berfungsi untuk menentukan class css dari tag jenis izin
 function getTagClass(jenis) {
   const map = { sakit: 'tag-sakit', cuti: 'tag-cuti', dinas: 'tag-dinas', keperluan: 'tag-keperluan' };
   return map[jenis] || 'tag-sakit';
 }
 
+// Berfungsi untuk menentukan simbol pada tag jenis izin
 function getTagDot(jenis) {
   const dots = { sakit: '●', cuti: '●', dinas: '●', keperluan: '●' };
   return dots[jenis] || '●';
 }
 
+// Berfungsi untuk menghitung jumlah pengajuan yang masih pending
 function countPending() {
   return dataPengajuan.filter(p => p.status === 'pending').length;
 }
 
+// Berfungsi untuk memperbarui jumlah badge pengajuan
 function updateBadge() {
   const n = countPending();
+
+  // Menampilkan jumlah pengajuan pending pada badge
   document.getElementById('badge-count').textContent = n;
+
+  // Menampilkan keterangan jumlah pengajuan pada subtitle
   document.getElementById('subtitle-count').textContent =
     `${n} Pengajuan menunggu persetujuan`;
 }
 
 
-// ─────────────────────────────────────────────
-// 4. RENDER KARTU
-// ─────────────────────────────────────────────
+// 5. RENDER KARTU
+// Render kartu untuk menampilkan seluruh data pengajuan izin
 function renderKartu() {
+
+  // Mendapatkan elemen container list pengajuan yang nantinya akan di isi dengan data list pengajuan
   const list = document.getElementById('pengajuan-list');
   const emptyState = document.getElementById('empty-state');
 
   // Filter + Search
+  // dari data dummy diberikan difilter
   const filtered = dataPengajuan.filter(p => {
+
+    // filter berdasarkan jenis izin
     const matchFilter = filterAktif === 'semua' || p.jenis === filterAktif;
+
+    // Filter pencarian berdasarkan nama departemen dan alasan
     const matchSearch = p.nama.toLowerCase().includes(searchQuery) ||
                         p.dept.toLowerCase().includes(searchQuery) ||
                         p.alasan.toLowerCase().includes(searchQuery);
+
+    // Mengembalikan hasil filter dari jenis izin dan query pencarian
     return matchFilter && matchSearch;
   });
 
+  // Mengosongkan container sebelum data ditampilkan ulang
   list.innerHTML = '';
 
+  // Jika data pengajuan kosong maka akan menampilkan bahwa data kosong
   if (filtered.length === 0) {
     emptyState.classList.remove('d-none');
     return;
   }
+
   emptyState.classList.add('d-none');
 
+  // menampilkan isi dari data pengajuan yang sudah difilter
   filtered.forEach((p, idx) => {
+
+    // membuat element div kartu
     const card = document.createElement('div');
+
     card.className = `pengajuan-card${p.urgent ? ' urgent-card' : ''}`;
     card.dataset.id = p.id;
     card.style.animationDelay = `${idx * 0.06}s`;
@@ -253,14 +185,15 @@ function renderKartu() {
         ? `<span class="status-badge status-disetujui"><i class="bi bi-check-circle-fill"></i> Disetujui</span>`
         : `<span class="status-badge status-ditolak"><i class="bi bi-x-circle-fill"></i> Ditolak</span>`;
 
+    // Jika terdapat lampiran maka tampilkan lampiran
     const lampiranHTML = p.lampiran
       ? `<span class="detail-value">
            <i class="bi bi-paperclip"></i> ${p.lampiran}
          </span>`
       : `<span class="detail-value" style="color:var(--muted);font-weight:500;">Tidak ada</span>`;
 
+    // Mengisi isi kartu pengajuan
     card.innerHTML = `
-      <!-- Header Row -->
       <div class="card-header-row">
         <div class="card-avatar">${p.inisial}</div>
         <div class="flex-grow-1">
@@ -273,143 +206,82 @@ function renderKartu() {
           ${actionHTML}
         </div>
       </div>
-
-      <!-- Detail Row -->
-      <div class="card-detail-row">
-        <div class="detail-col">
-          <label>Tanggal</label>
-          <div class="detail-value">${p.tanggal}</div>
-        </div>
-        <div class="detail-col">
-          <label>Durasi</label>
-          <div class="detail-value">${p.durasi}</div>
-        </div>
-        <div class="detail-col lampiran">
-          <label>Lampiran</label>
-          ${lampiranHTML}
-        </div>
-      </div>
-
-      <!-- Alasan -->
-      <div class="card-alasan">${p.alasan}</div>
     `;
 
+    // element yang dibuat ditambahkan menjadi anak dari container list
     list.appendChild(card);
   });
 
-  // Pasang event listener tombol per kartu
+  // Event tombol aksi pada setiap kartu
   list.querySelectorAll('.btn-action-tolak').forEach(btn => {
     btn.addEventListener('click', () => bukaModal('tolak', parseInt(btn.dataset.id)));
   });
+
   list.querySelectorAll('.btn-action-setujui').forEach(btn => {
     btn.addEventListener('click', () => bukaModal('setujui', parseInt(btn.dataset.id)));
   });
 }
 
 
-// ─────────────────────────────────────────────
-// 5. MODAL KONFIRMASI
-// ─────────────────────────────────────────────
-const modalEl     = document.getElementById('modalKonfirmasi');
-const modalMsg    = document.getElementById('modal-message');
-const btnKonfirm  = document.getElementById('btnKonfirmAksi');
-const bsModal     = new bootstrap.Modal(modalEl);
-
-function bukaModal(type, id) {
-  pendingAction = { type, id };
-
-  if (type === 'tolak') {
-    const p = dataPengajuan.find(x => x.id === id);
-    modalMsg.textContent = `Tolak pengajuan izin dari ${p.nama}?`;
-    btnKonfirm.className = 'btn-modal-konfirm danger';
-    btnKonfirm.textContent = 'Ya, Tolak';
-  } else if (type === 'setujui') {
-    const p = dataPengajuan.find(x => x.id === id);
-    modalMsg.textContent = `Setujui pengajuan izin dari ${p.nama}?`;
-    btnKonfirm.className = 'btn-modal-konfirm';
-    btnKonfirm.textContent = 'Ya, Setujui';
-  } else if (type === 'tolakSemua') {
-    modalMsg.textContent = `Tolak SEMUA pengajuan yang sedang pending?`;
-    btnKonfirm.className = 'btn-modal-konfirm danger';
-    btnKonfirm.textContent = 'Ya, Tolak Semua';
-  } else if (type === 'setujuiSemua') {
-    modalMsg.textContent = `Setujui SEMUA pengajuan yang sedang pending?`;
-    btnKonfirm.className = 'btn-modal-konfirm';
-    btnKonfirm.textContent = 'Ya, Setujui Semua';
-  }
-
-  bsModal.show();
-}
-
-btnKonfirm.addEventListener('click', () => {
-  if (!pendingAction) return;
-  const { type, id } = pendingAction;
-
-  if (type === 'tolak') {
-    dataPengajuan = dataPengajuan.map(p => p.id === id ? { ...p, status: 'ditolak' } : p);
-  } else if (type === 'setujui') {
-    dataPengajuan = dataPengajuan.map(p => p.id === id ? { ...p, status: 'disetujui' } : p);
-  } else if (type === 'tolakSemua') {
-    dataPengajuan = dataPengajuan.map(p => p.status === 'pending' ? { ...p, status: 'ditolak' } : p);
-  } else if (type === 'setujuiSemua') {
-    dataPengajuan = dataPengajuan.map(p => p.status === 'pending' ? { ...p, status: 'disetujui' } : p);
-  }
-
-  pendingAction = null;
-  bsModal.hide();
-  updateBadge();
-  renderKartu();
-});
-
-
-// ─────────────────────────────────────────────
 // 6. SEARCH
-// ─────────────────────────────────────────────
+// Berfungsi untuk melakukan pencarian data pengajuan
 document.getElementById('searchInput').addEventListener('input', function () {
+
+  // Mengambil nilai input pencarian dan mengubahnya menjadi huruf kecil
   searchQuery = this.value.toLowerCase().trim();
+
+  // Menampilkan ulang kartu berdasarkan hasil pencarian
   renderKartu();
 });
 
 
-// ─────────────────────────────────────────────
 // 7. FILTER DROPDOWN
-// ─────────────────────────────────────────────
 document.querySelectorAll('.filter-option').forEach(item => {
   item.addEventListener('click', function (e) {
+
     e.preventDefault();
+
+    // Mengubah jenis filter yang aktif
     filterAktif = this.dataset.value;
+
+    // Mengubah label filter yang ditampilkan
     document.getElementById('filterLabel').textContent = this.textContent;
+
+    // Menampilkan ulang kartu berdasarkan filter
     renderKartu();
   });
 });
 
 
-// ─────────────────────────────────────────────
 // 8. BULK ACTIONS
-// ─────────────────────────────────────────────
+// Jika tombol tolak semua ditekan maka membuka modal konfirmasi
 document.getElementById('btnTolakSemua').addEventListener('click', () => {
   bukaModal('tolakSemua');
 });
 
+// Jika tombol setujui semua ditekan maka membuka modal konfirmasi
 document.getElementById('btnSetujuiSemua').addEventListener('click', () => {
   bukaModal('setujuiSemua');
 });
 
 
-// ─────────────────────────────────────────────
 // 9. SIDEBAR ACTIVE STATE
-// ─────────────────────────────────────────────
+// Mengatur menu sidebar yang sedang aktif
 document.querySelectorAll('.sidebar-item').forEach(item => {
   item.addEventListener('click', function (e) {
+
     e.preventDefault();
+
+    // Menghapus class active pada semua sidebar
     document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+
+    // Menambahkan class active pada sidebar yang diklik
     this.classList.add('active');
   });
 });
 
 
-// ─────────────────────────────────────────────
 // 10. INIT
-// ─────────────────────────────────────────────
+// Menjalankan fungsi awal saat halaman pertama kali dibuka
 updateBadge();
 renderKartu();
