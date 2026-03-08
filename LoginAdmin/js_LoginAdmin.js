@@ -19,13 +19,15 @@ const errorNip        = document.getElementById('errorNip');
 const errorPassword   = document.getElementById('errorPassword');
 const wrapperNip      = document.getElementById('wrapperNip');
 const wrapperPassword = document.getElementById('wrapperPassword');
-  
+
+// Menampilkan pesan kesalahan  
 function setInvalid(wrapper, msgEl, msg, errorIcon) {
   wrapper.classList.add('is-invalid');
   msgEl.innerHTML = `<i class="bi bi-exclamation-circle me-1"></i>${msg}`;
   if (errorIcon) errorIcon.style.display = 'inline-block';
 }
 
+// Mengosongkan pesan kesalahan
 function resetField(wrapper, msgEl, showLeftIcon) {
   wrapper.classList.remove('is-invalid');
   msgEl.innerHTML = '';
