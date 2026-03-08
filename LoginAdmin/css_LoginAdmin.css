@@ -4,7 +4,7 @@
 
 body {
     min-height: 100vh;
-    overflow: hidden;
+    overflow: auto;
 }
 
 /* PANEL KIRI */
@@ -51,14 +51,15 @@ body {
   -webkit-backdrop-filter: blur(10px);            /* support Safari */
   border: 1px solid rgba(255, 255, 255, 0.25);  /* border kaca */
   border-radius: 50px;                            /* bentuk kapsul */
-  padding: 10px 20px;
+  padding: 2px 15px;
   color: #fff;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 .brand-badge i {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 /* Hero Title */
@@ -84,7 +85,7 @@ body {
 
 /* PANEL KANAN */
 .right-panel {
-  min-height: 100vh;
+  min-height: auto;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -207,18 +208,81 @@ body {
   transform: translateY(0);
 }
 
+/* Border Invalid Input */
+.input-group-custom.is-invalid .form-control {
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
+}
+
+/* Ikon Error (!) di Sisi Kanan input NIP */
+.input-error-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #e63946;
+  font-size: 1.05rem;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Ganti warna teks pesan error */
+.text-danger {
+  color: #e63946 !important;
+}
+
 /* RESPONSIVE */
 @media (max-width: 767px) {
   .left-panel {
-    min-height: 260px;
-    padding: 2.5rem 2rem 3rem;
+    min-height: auto;
+    padding: 2rem 2rem 2.5rem;
+    gap: 1.5rem;
   }
 
   .hero-title {
-    font-size: 2.8rem;
+    font-size: 3rem;
+  }
+
+  .hero-sub {
+    font-size: 0.88rem;
+  }
+  
+  .brand-badge {
+    font-size: 0.8rem;
+    padding: 2px 15px;
   }
 
   .right-panel {
     padding: 2rem 0;
+  }
+
+  .login-title {
+    font-size: 2rem;
+  }
+}
+
+/* RESPONSIVE: Layar Mini*/
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .brand-badge {
+    font-size: 0.8rem;
+    padding: 2px 15px;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .input-group-custom input {
+    height: 48px;
+    font-size: 0.9rem;
+  }
+
+  .btn-masuk {
+    height: 48px;
+    font-size: 1rem;
   }
 }
