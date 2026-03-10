@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="page-id" content="rekap"/>
+  <title>Rekap Laporan – CV. NAFIHAKA Creative</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="rekap.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOPBAR
+  ════════════════════════════════════════ -->
+  <header class="topbar d-flex align-items-center justify-content-between">
+    <div class="topbar-brand">CV. NAFIHAKA Creative</div>
+    <div class="d-flex align-items-center gap-3">
+      <span id="topbar-date" class="topbar-date"></span>
+      <div id="topbar-clock" class="topbar-clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       LAYOUT WRAPPER
+  ════════════════════════════════════════ -->
+  <div class="layout-wrapper d-flex">
+
+    <!-- ─────────────────────────────────────
+         SIDEBAR
+    ──────────────────────────────────────── -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+
+      <!-- Toggle button (mobile) -->
+      <button class="sidebar-toggle d-lg-none" id="sidebarToggle" aria-label="Tutup sidebar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <!-- UTAMA -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Utama</div>
+        <a href="dashboard.html" class="sidebar-item" data-page="dashboard">
+          <i class="bi bi-house-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="presensi.html" class="sidebar-item" data-page="presensi">
+          <i class="bi bi-calendar-check"></i>
+          <span>Presensi Hari Ini</span>
+        </a>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- MANAJEMEN -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Manajemen</div>
+        <a href="validasi.html" class="sidebar-item" data-page="validasi">
+          <i class="bi bi-check-circle"></i>
+          <span>Validasi Izin</span>
+          <span class="sidebar-badge ms-auto" id="badge-count">10</span>
+        </a>
+        <a href="rekap.html" class="sidebar-item active" data-page="rekap">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Rekap Laporan</span>
+        </a>
+        <a href="karyawan.html" class="sidebar-item" data-page="karyawan">
+          <i class="bi bi-people"></i>
+          <span>Karyawan</span>
+        </a>
+      </div>
+
+      <!-- USER FOOTER -->
+      <div class="sidebar-footer mt-auto">
+        <div class="user-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Akari Suida</div>
+          <div class="user-role">Adminstrator</div>
+          <div class="user-company">CV. NAFIHAKA Creative</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Overlay untuk mobile -->
+    <div class="sidebar-overlay d-lg-none" id="sidebarOverlay"></div>
+
+    <!-- ─────────────────────────────────────
+         MAIN CONTENT
+    ──────────────────────────────────────── -->
+    <main class="main-content flex-grow-1">
+
+      <!-- Mobile topbar menu button -->
+      <button class="btn-menu-mobile d-lg-none" id="btnMenuMobile">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- ══ SECTION 1: Ringkasan + Filter ══ -->
+      <section class="rekap-header-section mb-4">
+
+        <div class="rekap-title-row">
+          <div>
+            <h4 class="page-title">Rekap Laporan</h4>
+            <p class="page-subtitle">Laporan Kehadiran Bulanan</p>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar-row">
+          <!-- Filter Bulan -->
+          <div class="dropdown">
+            <button class="btn-filter dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" id="filterBulanLabel">
+              <span>Februari 2026</span>
+              <i class="bi bi-chevron-down ms-1" style="font-size:.75rem;"></i>
+            </button>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item filter-bulan" data-value="Februari 2026" href="#">Februari 2026</a></li>
+              <li><a class="dropdown-item filter-bulan" data-value="Januari 2026" href="#">Januari 2026</a></li>
+              <li><a class="dropdown-item filter-bulan" data-value="Desember 2025" href="#">Desember 2025</a></li>
+              <li><a class="dropdown-item filter-bulan" data-value="November 2025" href="#">November 2025</a></li>
+              <li><a class="dropdown-item filter-bulan" data-value="Oktober 2025" href="#">Oktober 2025</a></li>
+            </ul>
+          </div>
+
+          <!-- Filter Divisi -->
+          <div class="dropdown">
+            <button class="btn-filter dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" id="filterDivisiLabel">
+              <span>Semua Divisi</span>
+              <i class="bi bi-chevron-down ms-1" style="font-size:.75rem;"></i>
+            </button>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item filter-divisi" data-value="semua" href="#">Semua Divisi</a></li>
+              <li><hr class="dropdown-divider"/></li>
+              <li><a class="dropdown-item filter-divisi" data-value="HRD" href="#">HRD</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="IT" href="#">IT</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Finance" href="#">Finance</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Marketing" href="#">Marketing</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Operations" href="#">Operations</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Design" href="#">Design</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Sales" href="#">Sales</a></li>
+            </ul>
+          </div>
+
+          <!-- Export PDF -->
+          <button class="btn-export" id="btnExport">
+            <span>Export PDF</span>
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="stat-cards-grid">
+          <div class="stat-box">
+            <div class="stat-number" id="stat-total">295</div>
+            <div class="stat-label">Total<br>Karyawan</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="stat-kehadiran">87,4%</div>
+            <div class="stat-label">Rata-rata<br>Kehadiran</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="stat-terlambat">8,2%</div>
+            <div class="stat-label">Rata-rata<br>Keterlambatan</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="stat-alpha">4,4%</div>
+            <div class="stat-label">Rata-rata<br>Alpha</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="stat-izin">150</div>
+            <div class="stat-label">Total Izin<br>Disetujui</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══ SECTION 2: Tabel ══ -->
+      <section class="rekap-table-section">
+
+        <!-- Header tabel -->
+        <div class="table-header-row">
+          <h5 class="table-title" id="table-title">Rekap per Karyawan – Februari 2026</h5>
+          <div class="search-box">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari Karyawan...."/>
+          </div>
+        </div>
+
+        <!-- Tabel responsif -->
+        <div class="table-scroll-wrap">
+          <table class="rekap-table">
+            <thead>
+              <tr>
+                <th class="col-karyawan">Karyawan</th>
+                <th class="col-divisi">Divisi</th>
+                <th class="col-num">Hadir</th>
+                <th class="col-num">Terlambat</th>
+                <th class="col-num">Izin</th>
+                <th class="col-num">Absen</th>
+                <th class="col-pct">% Kehadiran</th>
+                <th class="col-detail">Detail</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Diisi JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="empty-state d-none">
+          <i class="bi bi-inbox empty-icon"></i>
+          <p class="empty-text">Tidak ada data karyawan yang ditemukan</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-row">
+          <div class="pagination-info" id="pagination-info"></div>
+          <div class="d-flex gap-2 flex-wrap" id="pagination-btns"></div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL DETAIL KARYAWAN
+  ════════════════════════════════════════ -->
+  <div class="modal fade" id="modalDetail" tabindex="-1" aria-labelledby="modalDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content modal-custom">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold" id="modalDetailLabel">Detail Kehadiran Karyawan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body pt-3" id="modal-detail-body">
+          <!-- Diisi JS -->
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn-modal-tutup" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="rekap.js"></script>
+  <!-- App Router -->
+  <script src="app.js"></script>
+</body>
+</html>

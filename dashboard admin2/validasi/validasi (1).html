@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="page-id" content="validasi"/>
+  <title>Validasi Izin – CV. NAFIHAKA Creative</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="validasi.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOPBAR
+  ════════════════════════════════════════ -->
+  <header class="topbar d-flex align-items-center justify-content-between">
+    <div class="topbar-brand">CV. NAFIHAKA Creative</div>
+    <div class="d-flex align-items-center gap-3">
+      <span id="topbar-date" class="topbar-date"></span>
+      <div id="topbar-clock" class="topbar-clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       LAYOUT WRAPPER
+  ════════════════════════════════════════ -->
+  <div class="layout-wrapper d-flex">
+
+    <!-- ─────────────────────────────────────
+         SIDEBAR
+    ──────────────────────────────────────── -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+
+      <!-- Tombol tutup sidebar (mobile) -->
+      <button class="sidebar-close-btn d-lg-none" id="sidebarToggle" aria-label="Tutup">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <!-- UTAMA -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Utama</div>
+        <a href="dashboard.html" class="sidebar-item" data-page="dashboard">
+          <i class="bi bi-house-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="presensi.html" class="sidebar-item" data-page="presensi">
+          <i class="bi bi-calendar-check"></i>
+          <span>Presensi Hari Ini</span>
+        </a>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- MANAJEMEN -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Manajemen</div>
+        <a href="validasi.html" class="sidebar-item active" data-page="validasi">
+          <i class="bi bi-check-circle"></i>
+          <span>Validasi Izin</span>
+          <span class="sidebar-badge ms-auto" id="badge-count">10</span>
+        </a>
+        <a href="rekap.html" class="sidebar-item" data-page="rekap">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Rekap Laporan</span>
+        </a>
+        <a href="karyawan.html" class="sidebar-item" data-page="karyawan">
+          <i class="bi bi-people"></i>
+          <span>Karyawan</span>
+        </a>
+      </div>
+
+      <!-- USER FOOTER -->
+      <div class="sidebar-footer mt-auto">
+        <div class="user-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Akari Suida</div>
+          <div class="user-role">Adminstrator</div>
+          <div class="user-company">CV. NAFIHAKA Creative</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Overlay mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ─────────────────────────────────────
+         MAIN CONTENT
+    ──────────────────────────────────────── -->
+    <main class="main-content flex-grow-1">
+
+      <!-- Tombol hamburger mobile -->
+      <button class="btn-menu-mobile d-lg-none" id="btnMenuMobile">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- ── Page Header ── -->
+      <div class="page-header">
+
+        <h4 class="page-title">Validasi Pengajuan Izin</h4>
+        <p class="page-subtitle" id="subtitle-count">10 Pengajuan menunggu persetujuan</p>
+
+        <!-- Toolbar: Search + Filter + Bulk -->
+        <div class="toolbar-row">
+
+          <!-- Search -->
+          <div class="search-box">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input"
+              placeholder="Cari Pengajuan...."/>
+          </div>
+
+          <!-- Filter Jenis -->
+          <div class="dropdown">
+            <button class="btn-filter dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" id="filterLabel">
+              <span>Semua Jenis</span>
+              <i class="bi bi-chevron-down btn-filter-arrow"></i>
+            </button>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item filter-option" data-value="semua"     href="#">Semua Jenis</a></li>
+              <li><hr class="dropdown-divider"/></li>
+              <li><a class="dropdown-item filter-option" data-value="sakit"     href="#">Sakit</a></li>
+              <li><a class="dropdown-item filter-option" data-value="cuti"      href="#">Cuti</a></li>
+              <li><a class="dropdown-item filter-option" data-value="dinas"     href="#">Dinas Luar</a></li>
+              <li><a class="dropdown-item filter-option" data-value="keperluan" href="#">Keperluan Pribadi</a></li>
+            </ul>
+          </div>
+
+          <!-- Bulk Actions -->
+          <div class="bulk-actions">
+            <button class="btn-bulk-tolak" id="btnTolakSemua">
+              <i class="bi bi-x-lg"></i>
+              <span>Tolak Semua</span>
+            </button>
+            <button class="btn-bulk-setujui" id="btnSetujuiSemua">
+              <i class="bi bi-check2-square"></i>
+              <span>Setujui Semua</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+      <!-- /page-header -->
+
+      <!-- ── Daftar Kartu Pengajuan ── -->
+      <div id="pengajuan-list"></div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state d-none">
+        <i class="bi bi-inbox empty-icon"></i>
+        <p class="empty-text">Tidak ada pengajuan yang ditemukan</p>
+      </div>
+
+    </main>
+
+  </div>
+  <!-- /layout-wrapper -->
+
+  <!-- ═══════════════════════════════════════
+       MODAL KONFIRMASI
+  ════════════════════════════════════════ -->
+  <div class="modal fade" id="modalKonfirmasi" tabindex="-1"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-custom">
+        <div class="modal-header border-0 pb-1">
+          <h5 class="modal-title fw-bold" id="modalLabel">Konfirmasi Aksi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body pt-2">
+          <p id="modal-message" class="mb-0 modal-msg-text">Apakah Anda yakin?</p>
+        </div>
+        <div class="modal-footer border-0 pt-2">
+          <button type="button" class="btn-modal-batal" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn-modal-konfirm" id="btnKonfirmAksi">Ya, Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="validasi.js"></script>
+  <!-- App Router -->
+  <script src="app.js"></script>
+</body>
+</html>
