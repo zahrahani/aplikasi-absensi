@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Memberi judul dari header tab -->
+	<title>Form Mahasiswa</title>
+	<!-- Menghubungkan file index.html dengan framework css Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+	<!-- Container yang akan digunakan sebagai wadah dari tempat penyimpanan elemen -->
+	<div class="container-fluid d-flex flex-column align-items-center">
+		<!-- Pembungkus dari form input -->
+		<div class="card shadow-sm m-4 p-4" style="width: 25rem">
+			<!-- Input NIM -->
+			<div class="mb-3">
+				<label for="nim" class="form-label">NIM Mahasiswa</label>
+				<input type="text" class="form-control" id="nim" placeholder="2410506001">
+			</div>
+			<!-- Input Nama Mahasiswa -->
+			<div class="mb-3">
+				<label for="nama" class="form-label">Nama Mahasiswa</label>
+				<input type="text" class="form-control" id="nama" placeholder="Haga Figo">
+			</div>
+			<div class="mb-3 px-2">
+				<button class="btn btn-primary w-100" id="tambahMahasiswa" type="submit">Tambah Mahasiswa</button>
+			</div>
+		</div>
+
+		<!-- Pembungkus dari table -->
+		<div class="card" style="width: 25rem">
+			<!-- table yang akan di isi -->
+			<table class="table table-bordered">
+				<thead class="table-primary">
+				<tr>
+					<th>NIM Mahasiswa</th>
+					<th>Nama Mahasiswa</th>
+				</tr>
+				</thead>
+				<tbody id="isiTableMahasiswa">
+				</tbody>
+			</table>
+		</div>
+	</div>
+<script>
+	// Menginisiasi elemen html agar bisa digunakan di javascript DOM
+	let nim = document.getElementById('nim');
+	let nama = document.getElementById('nama');
+	let btnMahasiswa = document.getElementById("tambahMahasiswa")
+	let bodyTabel = document.getElementById('isiTableMahasiswa')
+	let dataMahasiswa = [];
+
+	btnMahasiswa.addEventListener('click', (e) => {
+		// Matikan aksi default
+		e.preventDefault();
+
+		// tambahkan data ke dalam array datamahasiswa
+		dataMahasiswa.push({nimMahasiswa: nim.value, namaMahasiswa: nama.value});
+		tampilkanIsiTabel();
+	});
+
+	function tampilkanIsiTabel () {
+		// Jika isi dari array dataMahasiswa kosong maka akan menampilkan pesan
+		if (dataMahasiswa.length == 0) {
+			bodyTabel.innerHTML = "<tr><td colspan='2'>Isi dari tabel kosong</td></tr>"
+			return;
+		}
+
+		// jika asumsi bahwa isi dari data mahasiswa tidak kosong maka akan menampilkan isinya
+		let isiStrTabel = dataMahasiswa.map((e, i) => {
+			return `<tr><td>${e.nimMahasiswa}</td><td>${e.namaMahasiswa}</td></tr>`
+		}).join("");
+
+		console.log(isiStrTabel);
+
+		bodyTabel.innerHTML = isiStrTabel;
+	}
+	tampilkanIsiTabel();
+
+</script>
+
+</body>
+</html>
