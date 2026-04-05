@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karyawan - CV. NAFIHAKA Creative</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="karyawan.css" />
+</head>
+<body>
+
+  <!-- ================================================================
+       TOPBAR
+  ================================================================ -->
+  <nav class="topbar navbar px-4 py-2">
+    <span class="navbar-brand text-white fw-bold fs-5 mb-0">CV. NAFIHAKA Creative</span>
+    <div class="ms-auto d-flex gap-3 align-items-center">
+      <span class="text-white" id="tanggal"></span>
+      <span class="badge bg-light text-dark fs-6 px-3 py-2" id="jam"></span>
+    </div>
+  </nav>
+
+  <!-- ================================================================
+       MAIN WRAPPER
+  ================================================================ -->
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- ============================================================
+           SIDEBAR
+      ============================================================ -->
+      <div class="col-md-2 sidebar py-3 px-2">
+
+        <p class="section-label mt-2 mb-1">Utama</p>
+        <ul class="nav flex-column gap-1">
+          <li class="nav-item"><a href="dashboard-nafihaka.html" class="nav-link">🏠 Dashboard</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">📅 Absensi Hari Ini</a></li>
+        </ul>
+
+        <p class="section-label mt-3 mb-1">Manajemen</p>
+        <ul class="nav flex-column gap-1">
+          <li class="nav-item">
+            <a href="#" class="nav-link d-flex justify-content-between align-items-center">
+              📋 Validasi Izin
+              <span class="badge bg-primary rounded-pill">10</span>
+            </a>
+          </li>
+          <li class="nav-item"><a href="#" class="nav-link">📊 Rekap Laporan</a></li>
+          <li class="nav-item"><a href="#" class="nav-link active-menu">👥 Karyawan</a></li>
+        </ul>
+
+        <!-- Profile -->
+        <div class="d-flex align-items-center gap-2 px-2 mt-4 pt-3 border-top" id="sidebar-profile">
+          <div class="avatar-circle sidebar-avatar" id="sidebar-avatar-initials">AS</div>
+          <div>
+            <div class="fw-semibold small" id="sidebar-nama">Akari Suida</div>
+            <div class="text-muted sidebar-sub" id="sidebar-jabatan">Administrator</div>
+            <div class="sidebar-company" id="sidebar-perusahaan">CV. NAFIHAKA Creative</div>
+          </div>
+        </div>
+
+      </div>
+      <!-- END SIDEBAR -->
+
+      <!-- ============================================================
+           MAIN CONTENT
+      ============================================================ -->
+      <div class="col-md-10 p-4 main-content">
+
+        <!-- Page Header -->
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h5 class="fw-bold mb-0">Data Karyawan</h5>
+            <small class="text-muted">Kelola seluruh data karyawan CV. NAFIHAKA Creative</small>
+          </div>
+          <button class="btn btn-primary-custom text-white px-4 py-2" id="btn-tambah-karyawan">
+            + Tambah Karyawan
+          </button>
+        </div>
+
+        <!-- ============================================================
+             STAT CARDS
+        ============================================================ -->
+        <div class="row g-3 mb-4" id="stat-cards">
+          <div class="col-6 col-lg-3">
+            <div class="stat-card card p-3">
+              <div class="text-muted small">Total Karyawan</div>
+              <div class="fs-2 fw-bold stat-primary" id="stat-total">0</div>
+              <div class="text-muted stat-sub">Seluruh divisi</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card card p-3">
+              <div class="text-muted small">Karyawan Aktif</div>
+              <div class="fs-2 fw-bold text-success" id="stat-aktif">0</div>
+              <div class="text-muted stat-sub">Status aktif</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card card p-3">
+              <div class="text-muted small">Karyawan Baru</div>
+              <div class="fs-2 fw-bold text-warning" id="stat-baru">0</div>
+              <div class="text-muted stat-sub">Bulan ini</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card card p-3">
+              <div class="text-muted small">Tidak Aktif</div>
+              <div class="fs-2 fw-bold text-danger" id="stat-nonaktif">0</div>
+              <div class="text-muted stat-sub">Resign / cuti</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             TABLE CARD
+        ============================================================ -->
+        <div class="karyawan-card card p-4">
+
+          <!-- Filter & Search -->
+          <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-3">
+            <div class="d-flex gap-2 flex-wrap">
+              <select class="form-select form-select-sm filter-input" id="filter-dept" style="width:auto;">
+                <option value="">Semua Departemen</option>
+                <option>Desain</option>
+                <option>Produksi</option>
+                <option>Marketing</option>
+                <option>IT</option>
+                <option>Keuangan</option>
+                <option>HRD</option>
+              </select>
+              <select class="form-select form-select-sm filter-input" id="filter-status" style="width:auto;">
+                <option value="">Semua Status</option>
+                <option>Aktif</option>
+                <option>Tidak Aktif</option>
+                <option>Cuti</option>
+              </select>
+            </div>
+            <div class="input-group" style="max-width:240px;">
+              <input type="text" class="form-control form-control-sm filter-input" id="search-input" placeholder="Cari nama / ID..." />
+              <button class="btn btn-primary-custom text-white px-3" id="btn-search">🔍</button>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-borderless align-middle">
+              <thead>
+                <tr>
+                  <th>Karyawan</th>
+                  <th>ID</th>
+                  <th>Departemen</th>
+                  <th>Jabatan</th>
+                  <th>Tgl Bergabung</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-karyawan">
+                <!-- Rows dirender oleh JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty state -->
+          <div id="empty-state" class="text-center text-muted py-5 d-none">
+            <div class="fs-1">🔍</div>
+            <div class="mt-2">Tidak ada karyawan yang ditemukan.</div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+            <small class="text-muted" id="pagination-info">Menampilkan 0–0 dari 0 karyawan</small>
+            <nav>
+              <ul class="pagination pagination-sm mb-0" id="pagination-nav">
+                <!-- Dirender oleh JS -->
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+        <!-- END TABLE CARD -->
+
+      </div>
+      <!-- END MAIN CONTENT -->
+
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL: DETAIL KARYAWAN
+  ================================================================ -->
+  <div class="modal fade" id="modalDetail" tabindex="-1" aria-labelledby="modalDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title fw-bold" id="modalDetailLabel">Detail Informasi Karyawan</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+
+          <!-- Profil header -->
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <div class="big-avatar" id="detail-avatar"></div>
+            <div>
+              <h5 class="fw-bold mb-0" id="detail-nama"></h5>
+              <div class="text-muted small" id="detail-sub"></div>
+              <div class="mt-1" id="detail-badges"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="info-group"><div class="detail-label">Email</div><div class="detail-value" id="detail-email"></div></div>
+              <div class="info-group"><div class="detail-label">No. Telepon</div><div class="detail-value" id="detail-telp"></div></div>
+              <div class="info-group"><div class="detail-label">Tanggal Lahir</div><div class="detail-value" id="detail-tgl-lahir"></div></div>
+              <div class="info-group"><div class="detail-label">Jenis Kelamin</div><div class="detail-value" id="detail-gender"></div></div>
+              <div class="info-group"><div class="detail-label">Alamat</div><div class="detail-value" id="detail-alamat"></div></div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-group"><div class="detail-label">Departemen</div><div class="detail-value" id="detail-dept"></div></div>
+              <div class="info-group"><div class="detail-label">Jabatan</div><div class="detail-value" id="detail-jabatan"></div></div>
+              <div class="info-group"><div class="detail-label">Tanggal Bergabung</div><div class="detail-value" id="detail-tgl-gabung"></div></div>
+              <div class="info-group"><div class="detail-label">Tipe Kontrak</div><div class="detail-value" id="detail-kontrak"></div></div>
+              <div class="info-group"><div class="detail-label">Gaji Pokok</div><div class="detail-value" id="detail-gaji"></div></div>
+            </div>
+          </div>
+
+          <!-- Mini kehadiran -->
+          <div class="mt-3 p-3 rounded-3 kehadiran-mini">
+            <div class="fw-semibold small mb-2">Kehadiran Bulan Ini</div>
+            <div class="row g-2 text-center">
+              <div class="col-3"><div class="fw-bold text-success" id="detail-hadir">-</div><div class="text-muted stat-sub">Hadir</div></div>
+              <div class="col-3"><div class="fw-bold text-warning" id="detail-terlambat">-</div><div class="text-muted stat-sub">Terlambat</div></div>
+              <div class="col-3"><div class="fw-bold text-danger" id="detail-tidakhadir">-</div><div class="text-muted stat-sub">Tidak Hadir</div></div>
+              <div class="col-3"><div class="fw-bold text-info" id="detail-izin">-</div><div class="text-muted stat-sub">Izin</div></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-custom" id="btn-edit-from-detail">✏️ Edit Data</button>
+          <button class="btn btn-primary-custom text-white" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL: TAMBAH / EDIT KARYAWAN
+  ================================================================ -->
+  <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title fw-bold" id="modalFormLabel">Tambah Karyawan Baru</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <input type="hidden" id="form-id" />
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Nama Lengkap</label>
+              <input type="text" class="form-control filter-input" id="form-nama" placeholder="Nama lengkap" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Email</label>
+              <input type="email" class="form-control filter-input" id="form-email" placeholder="email@nafihaka.id" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">No. Telepon</label>
+              <input type="text" class="form-control filter-input" id="form-telp" placeholder="+62 8xx-xxxx-xxxx" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Tanggal Lahir</label>
+              <input type="date" class="form-control filter-input" id="form-tgl-lahir" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Jenis Kelamin</label>
+              <select class="form-select filter-input" id="form-gender">
+                <option value="">Pilih</option>
+                <option>Laki-laki</option>
+                <option>Perempuan</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Departemen</label>
+              <select class="form-select filter-input" id="form-dept">
+                <option value="">Pilih Departemen</option>
+                <option>Desain</option>
+                <option>Produksi</option>
+                <option>Marketing</option>
+                <option>IT</option>
+                <option>Keuangan</option>
+                <option>HRD</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Jabatan</label>
+              <input type="text" class="form-control filter-input" id="form-jabatan" placeholder="Jabatan / posisi" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Tipe Kontrak</label>
+              <select class="form-select filter-input" id="form-kontrak">
+                <option value="">Pilih Tipe</option>
+                <option>Karyawan Tetap</option>
+                <option>Kontrak</option>
+                <option>Magang</option>
+                <option>Freelance</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Tanggal Bergabung</label>
+              <input type="date" class="form-control filter-input" id="form-tgl-gabung" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Status</label>
+              <select class="form-select filter-input" id="form-status">
+                <option>Aktif</option>
+                <option>Tidak Aktif</option>
+                <option>Cuti</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-semibold">Gaji Pokok</label>
+              <input type="text" class="form-control filter-input" id="form-gaji" placeholder="Rp 0" />
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-semibold">Alamat</label>
+              <textarea class="form-control filter-input" id="form-alamat" rows="2" placeholder="Alamat lengkap"></textarea>
+            </div>
+          </div>
+          <!-- Validation alert -->
+          <div class="alert alert-danger mt-3 d-none" id="form-alert" role="alert"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-custom" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-primary-custom text-white px-4" id="btn-simpan">💾 Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL: KONFIRMASI HAPUS
+  ================================================================ -->
+  <div class="modal fade" id="modalHapus" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:420px;">
+      <div class="modal-content">
+        <div class="modal-header" style="background:#dc3545;">
+          <h6 class="modal-title fw-bold text-white">Hapus Karyawan</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="fs-1 mb-2">🗑️</div>
+          <p class="mb-1">Apakah Anda yakin ingin menghapus</p>
+          <p class="fw-bold" id="hapus-nama">-</p>
+          <p class="text-muted small">Tindakan ini tidak dapat dibatalkan.</p>
+          <input type="hidden" id="hapus-id" />
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+          <button class="btn btn-danger px-4" id="btn-konfirmasi-hapus">Hapus</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App JS -->
+  <script src="karyawan.js"></script>
+</body>
+</html>

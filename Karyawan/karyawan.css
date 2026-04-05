@@ -1,0 +1,307 @@
+/* ================================================================
+   karyawan.css — Halaman Karyawan CV. NAFIHAKA Creative
+================================================================ */
+
+/* --- Variables --- */
+:root {
+  --primary:      #3b30cc;
+  --primary-light:#ede9fe;
+  --sidebar-bg:   #f0f0f8;
+  --body-bg:      #e8e8f0;
+  --card-bg:      #ffffff;
+  --border-color: #f0f0f8;
+  --text-muted:   #888888;
+  --radius:       14px;
+}
+
+/* --- Base --- */
+body {
+  background-color: var(--body-bg);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.9rem;
+}
+
+/* ================================================================
+   TOPBAR
+================================================================ */
+.topbar {
+  background-color: var(--primary);
+}
+
+/* ================================================================
+   SIDEBAR
+================================================================ */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  min-height: 100vh;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 0 0.75rem;
+  display: block;
+}
+
+.sidebar .nav-link {
+  color: #333;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.875rem;
+  transition: background 0.15s;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #dcdcf0;
+}
+
+.sidebar .nav-link.active-menu {
+  background-color: var(--primary);
+  color: #fff !important;
+}
+
+/* Sidebar avatar */
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  font-size: 0.85rem;
+  background-color: #636e72;
+}
+
+.sidebar-sub {
+  font-size: 0.7rem;
+}
+
+.sidebar-company {
+  font-size: 0.7rem;
+  color: var(--primary);
+}
+
+/* ================================================================
+   MAIN CONTENT
+================================================================ */
+.main-content {
+  min-height: 100vh;
+}
+
+/* ================================================================
+   BUTTONS
+================================================================ */
+.btn-primary-custom {
+  background-color: var(--primary);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  transition: opacity 0.15s;
+}
+
+.btn-primary-custom:hover {
+  opacity: 0.88;
+}
+
+.btn-outline-custom {
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-outline-custom:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+/* ================================================================
+   STAT CARDS
+================================================================ */
+.stat-card {
+  border-radius: var(--radius);
+  border: none;
+  background-color: var(--card-bg);
+}
+
+.stat-primary {
+  color: var(--primary);
+}
+
+.stat-sub {
+  font-size: 0.75rem;
+}
+
+/* ================================================================
+   TABLE CARD
+================================================================ */
+.karyawan-card {
+  border-radius: var(--radius);
+  border: none;
+  background-color: var(--card-bg);
+}
+
+/* Filter inputs */
+.filter-input {
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  font-size: 0.85rem;
+}
+
+.filter-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.15rem rgba(59, 48, 204, 0.15);
+}
+
+/* Table */
+.table thead th {
+  background-color: #f5f5fb;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #555;
+  border: none;
+  padding: 0.75rem 0.85rem;
+}
+
+.table td {
+  vertical-align: middle;
+  font-size: 0.875rem;
+  border-color: var(--border-color);
+  padding: 0.65rem 0.85rem;
+}
+
+.table tbody tr:hover {
+  background-color: #f9f9fd;
+}
+
+/* ================================================================
+   AVATAR
+================================================================ */
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ================================================================
+   DEPARTMENT BADGES
+================================================================ */
+.badge-dept {
+  font-size: 0.7rem;
+  border-radius: 20px;
+  padding: 0.25em 0.75em;
+  font-weight: 600;
+}
+
+.dept-desain    { background: #ede9fe; color: #6c5ce7; }
+.dept-marketing { background: #d1fae5; color: #065f46; }
+.dept-produksi  { background: #fef3c7; color: #92400e; }
+.dept-it        { background: #dbeafe; color: #1e40af; }
+.dept-keuangan  { background: #fce7f3; color: #9d174d; }
+.dept-hrd       { background: #f3f4f6; color: #374151; }
+
+/* ================================================================
+   STATUS
+================================================================ */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+/* ================================================================
+   ACTION BUTTONS (table)
+================================================================ */
+.action-btn {
+  border: none;
+  background: transparent;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.action-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* ================================================================
+   PAGINATION
+================================================================ */
+.page-link {
+  color: var(--primary);
+  border-radius: 6px !important;
+  margin: 0 1px;
+}
+
+.page-item.active .page-link {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* ================================================================
+   MODALS
+================================================================ */
+.modal-header {
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.modal-content {
+  border-radius: var(--radius);
+  border: none;
+}
+
+/* Detail modal */
+.detail-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  color: #222;
+  font-weight: 500;
+}
+
+.info-group {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.info-group:last-child {
+  border-bottom: none;
+}
+
+.big-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.kehadiran-mini {
+  background-color: #f5f5fb;
+}
