@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Karyawan – CV. NAFIHAKA Creative</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="karyawan.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOPBAR
+  ════════════════════════════════════════ -->
+  <header class="topbar d-flex align-items-center justify-content-between px-4">
+    <div class="topbar-brand">CV. NAFIHAKA Creative</div>
+    <div class="d-flex align-items-center gap-3">
+      <span id="topbar-date" class="topbar-date"></span>
+      <div id="topbar-clock" class="topbar-clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       LAYOUT WRAPPER
+  ════════════════════════════════════════ -->
+  <div class="layout-wrapper d-flex">
+
+    <!-- ─────────────────────────────────────
+         SIDEBAR
+    ──────────────────────────────────────── -->
+    <aside class="sidebar d-flex flex-column">
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Utama</div>
+        <a href="dashboard.html" class="sidebar-item">
+          <i class="bi bi-house-door-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-calendar-check"></i>
+          <span>Absensi Hari Ini</span>
+        </a>
+      </div>
+
+      <hr class="sidebar-divider"/>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Manajemen</div>
+        <a href="validasi.html" class="sidebar-item">
+          <i class="bi bi-check2-circle"></i>
+          <span>Validasi Izin</span>
+          <span class="sidebar-badge ms-auto">10</span>
+        </a>
+        <a href="rekap.html" class="sidebar-item">
+          <i class="bi bi-bar-chart-line"></i>
+          <span>Rekap Laporan</span>
+        </a>
+        <a href="karyawan.html" class="sidebar-item active">
+          <i class="bi bi-people"></i>
+          <span>Karyawan</span>
+        </a>
+      </div>
+
+      <!-- User Footer -->
+      <div class="sidebar-footer mt-auto">
+        <div class="user-avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Akari Suida</div>
+          <div class="user-role">Adminstrator</div>
+          <div class="user-company">CV. NAFIHAKA Creative</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ─────────────────────────────────────
+         MAIN CONTENT
+    ──────────────────────────────────────── -->
+    <main class="main-content flex-grow-1">
+
+      <!-- ── Section 1: Header + Filter + Stats ── -->
+      <section class="karyawan-header-section mb-4">
+
+        <!-- Judul -->
+        <h4 class="page-title">Data Karyawan</h4>
+        <p class="page-subtitle">Informasi Seluruh Karyawan Aktif</p>
+
+        <!-- Toolbar: Filter Divisi, Filter Status, Tombol Tambah -->
+        <div class="toolbar d-flex flex-wrap align-items-center gap-2 mt-3 mb-4">
+
+          <!-- Filter Divisi -->
+          <div class="dropdown">
+            <button class="btn-filter dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" id="filterDivisiLabel">
+              Semua Divisi
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item filter-divisi" data-value="semua" href="#">Semua Divisi</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="HRD" href="#">HRD</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="IT" href="#">IT</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Finance" href="#">Finance</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Marketing" href="#">Marketing</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Operations" href="#">Operations</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Design" href="#">Design</a></li>
+              <li><a class="dropdown-item filter-divisi" data-value="Sales" href="#">Sales</a></li>
+            </ul>
+          </div>
+
+          <!-- Filter Status -->
+          <div class="dropdown">
+            <button class="btn-filter dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" id="filterStatusLabel">
+              Semua Status
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item filter-status" data-value="semua" href="#">Semua Status</a></li>
+              <li><a class="dropdown-item filter-status" data-value="aktif" href="#">Aktif</a></li>
+              <li><a class="dropdown-item filter-status" data-value="cuti" href="#">Cuti</a></li>
+              <li><a class="dropdown-item filter-status" data-value="nonaktif" href="#">Non-Aktif</a></li>
+            </ul>
+          </div>
+
+          <!-- Tombol Tambah Karyawan -->
+          <button class="btn-tambah ms-auto" id="btnTambah">
+            <i class="bi bi-plus-lg"></i>&nbsp; Tambah Karyawan
+          </button>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="row g-3" id="stat-cards">
+          <div class="col-6 col-md">
+            <div class="stat-box">
+              <div class="stat-number green" id="stat-total">295</div>
+              <div class="stat-label">Total Karyawan</div>
+            </div>
+          </div>
+          <div class="col-6 col-md">
+            <div class="stat-box">
+              <div class="stat-number green" id="stat-aktif">278</div>
+              <div class="stat-label">Karyawan Aktif</div>
+            </div>
+          </div>
+          <div class="col-6 col-md">
+            <div class="stat-box">
+              <div class="stat-number green" id="stat-cuti">12</div>
+              <div class="stat-label">Sedang Cuti</div>
+            </div>
+          </div>
+          <div class="col-6 col-md">
+            <div class="stat-box">
+              <div class="stat-number green" id="stat-divisi">8</div>
+              <div class="stat-label">Total Divisi</div>
+            </div>
+          </div>
+          <div class="col-6 col-md">
+            <div class="stat-box">
+              <div class="stat-number green" id="stat-baru">5</div>
+              <div class="stat-label">Karyawan Baru (Bulan Ini)</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── Section 2: Tabel Data Karyawan ── -->
+      <section class="karyawan-table-section">
+
+        <div class="table-section-header d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+          <h5 class="table-title" id="table-title">Daftar Karyawan Aktif</h5>
+          <!-- Search Karyawan -->
+          <div class="search-box d-flex align-items-center">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari Karyawan...."/>
+          </div>
+        </div>
+
+        <!-- Tabel -->
+        <div class="table-responsive">
+          <table class="karyawan-table w-100">
+            <thead>
+              <tr>
+                <th>Karyawan</th>
+                <th>Divisi</th>
+                <th>Jabatan</th>
+                <th>No. HP</th>
+                <th>Tgl. Bergabung</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Dirender oleh JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state d-none">
+          <i class="bi bi-inbox empty-icon"></i>
+          <p class="empty-text">Tidak ada data karyawan yang ditemukan</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex align-items-center justify-content-between mt-4 flex-wrap gap-2">
+          <div class="pagination-info" id="pagination-info"></div>
+          <div class="d-flex gap-2" id="pagination-btns"></div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL DETAIL KARYAWAN
+  ════════════════════════════════════════ -->
+  <div class="modal fade" id="modalDetail" tabindex="-1" aria-labelledby="modalDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-custom">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="modalDetailLabel">Detail Informasi Karyawan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body" id="modal-detail-body">
+          <!-- Diisi JS -->
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn-modal-edit" id="btnModalEdit">
+            <i class="bi bi-pencil-square"></i> Edit Data
+          </button>
+          <button type="button" class="btn-modal-tutup" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MODAL TAMBAH / EDIT KARYAWAN
+  ════════════════════════════════════════ -->
+  <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="modalFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content modal-custom">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="modalFormLabel">Tambah Karyawan Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label-custom">Nama Lengkap</label>
+              <input type="text" class="form-input-custom" id="formNama" placeholder="Masukkan nama lengkap"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">NIP</label>
+              <input type="text" class="form-input-custom" id="formNip" placeholder="Contoh: NFC-2026-001"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Divisi</label>
+              <select class="form-input-custom" id="formDivisi">
+                <option value="">-- Pilih Divisi --</option>
+                <option value="HRD">HRD</option>
+                <option value="IT">IT</option>
+                <option value="Finance">Finance</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Operations">Operations</option>
+                <option value="Design">Design</option>
+                <option value="Sales">Sales</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Jabatan</label>
+              <input type="text" class="form-input-custom" id="formJabatan" placeholder="Masukkan jabatan"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">No. Handphone</label>
+              <input type="text" class="form-input-custom" id="formHp" placeholder="Contoh: 0812-3456-7890"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Email</label>
+              <input type="email" class="form-input-custom" id="formEmail" placeholder="nama@nafihaka.com"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Tanggal Bergabung</label>
+              <input type="date" class="form-input-custom" id="formTanggal"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Status</label>
+              <select class="form-input-custom" id="formStatus">
+                <option value="aktif">Aktif</option>
+                <option value="cuti">Cuti</option>
+                <option value="nonaktif">Non-Aktif</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label-custom">Alamat</label>
+              <textarea class="form-input-custom" id="formAlamat" rows="2" placeholder="Masukkan alamat lengkap"></textarea>
+            </div>
+          </div>
+          <div id="form-error" class="form-error d-none">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span id="form-error-msg"></span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn-modal-batal" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn-modal-simpan" id="btnSimpan">
+            <i class="bi bi-floppy-fill"></i> Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="karyawan.js"></script>
+</body>
+</html>
