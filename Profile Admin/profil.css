@@ -1,0 +1,479 @@
+/* ═══════════════════════════════════════════
+   profil.css – CV. NAFIHAKA Creative
+   Halaman Profil Admin
+   Konsisten dengan: dashboard.css, rekap.css,
+   validasi.css (variabel, topbar, sidebar sama)
+════════════════════════════════════════════ */
+
+/* ── CSS Variables (identik dengan file lain) ── */
+:root {
+  --navy:       #2A2FA8;
+  --navy-dark:  #1e2280;
+  --green:      #3DB562;
+  --green-bg:   #e8f8ee;
+  --blue-light: #EEF1FF;
+  --text:       #1a1a2e;
+  --muted:      #6b7280;
+  --border:     #e2e5f0;
+  --white:      #ffffff;
+  --sidebar-w:  220px;
+  --topbar-h:   56px;
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ════════════════════════════════════════════
+   PAGE HEADER
+════════════════════════════════════════════ */
+.page-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.page-subtitle {
+  font-size: .875rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ── Tombol Simpan Perubahan ── */
+.btn-simpan-profil {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--green);
+  border: none;
+  color: #fff;
+  border-radius: 9px;
+  padding: 9px 22px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+.btn-simpan-profil:hover {
+  background: #2e8b44;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(61,181,98,.25);
+}
+
+/* ════════════════════════════════════════════
+   ALERT NOTIFIKASI
+════════════════════════════════════════════ */
+.profil-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: .875rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  animation: fadeUp .3s ease both;
+}
+
+.profil-alert-success {
+  background: var(--green-bg);
+  color: #166534;
+  border: 1.5px solid #86efac;
+}
+
+.profil-alert-error {
+  background: #fdeaea;
+  color: #991b1b;
+  border: 1.5px solid #fca5a5;
+}
+
+/* ════════════════════════════════════════════
+   KARTU IDENTITAS ADMIN
+════════════════════════════════════════════ */
+.profil-identity-card {
+  background: var(--white);
+  border: 2px solid var(--navy);
+  border-radius: 14px;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  animation: fadeUp .4s ease both;
+}
+
+/* Avatar bulat */
+.identity-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.identity-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  border: 3px solid var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: .02em;
+  transition: border-color .2s;
+  overflow: hidden;
+}
+
+.identity-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Label "Ubah Foto" */
+.ubah-foto-label {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .15s;
+}
+.ubah-foto-label:hover { color: var(--navy-dark); }
+
+/* Info teks samping avatar */
+.identity-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.identity-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+/* Tombol pensil kecil di samping nama */
+.btn-edit-inline {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: var(--blue-light);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .15s, color .15s;
+  padding: 0;
+}
+.btn-edit-inline:hover { background: var(--navy); color: #fff; }
+
+.identity-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.identity-role {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.identity-role i { color: var(--navy); font-size: .8rem; }
+
+.identity-divider { font-size: .6rem; color: var(--navy); }
+
+.identity-divisi {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.identity-nik {
+  font-size: .78rem;
+  color: var(--muted);
+  font-weight: 500;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ════════════════════════════════════════════
+   LABEL SECTION
+════════════════════════════════════════════ */
+.profil-section-label {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* ════════════════════════════════════════════
+   PROFIL CARD (shared untuk Data Diri, Kepeg., Keamanan)
+════════════════════════════════════════════ */
+.profil-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  animation: fadeUp .45s ease .1s both;
+}
+
+.profil-card-heading {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--navy);
+  display: inline-block;
+}
+
+/* ════════════════════════════════════════════
+   PROFIL FIELD (Data Diri: baris label+value+tombol)
+════════════════════════════════════════════ */
+.profil-field {
+  padding: 4px 0 10px;
+}
+
+.profil-field.has-divider {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+/* Label kecil abu-abu di atas nilai */
+.profil-field-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: .01em;
+  margin-bottom: 3px;
+}
+
+/* Baris nilai + tombol "Ubah" */
+.profil-field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.profil-field-value {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Titik-titik password */
+.password-dots {
+  letter-spacing: .25em;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Tombol "Ubah" per baris */
+.btn-ubah {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color .15s;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.btn-ubah:hover { color: var(--navy-dark); }
+
+/* Area edit yang muncul saat klik "Ubah" */
+.profil-field-edit {
+  margin-top: 10px;
+  animation: fadeUp .2s ease both;
+}
+
+/* Input field */
+.profil-input {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .875rem;
+  color: var(--text);
+  background: #fff;
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+  resize: none;
+  display: block;
+}
+.profil-input:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(42,47,168,.1);
+}
+.profil-input.mb-2 { margin-bottom: 8px; }
+
+/* Tombol Batal / Simpan di dalam edit */
+.profil-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-batal-field {
+  background: #f4f5fb;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-batal-field:hover { background: var(--border); }
+
+.btn-simpan-field {
+  background: var(--navy);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-simpan-field:hover { background: var(--navy-dark); }
+
+/* ════════════════════════════════════════════
+   DATA KEPEGAWAIAN (read-only grid)
+════════════════════════════════════════════ */
+.kepegawaian-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.kepegawaian-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.kepegawaian-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.kepegawaian-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.kepegawaian-value {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ════════════════════════════════════════════
+   LOGIN TERAKHIR
+════════════════════════════════════════════ */
+.last-login-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--blue-light);
+  border-radius: 10px;
+}
+
+.last-login-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.last-login-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 2px;
+}
+
+.last-login-value {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+}
+
+/* ════════════════════════════════════════════
+   ANIMASI
+════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .profil-identity-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .identity-name { justify-content: center; }
+  .identity-meta { justify-content: center; }
+  .identity-nik  { text-align: center; }
+  .kepegawaian-grid { grid-template-columns: 1fr; }
+  .kepegawaian-item:last-child { border-bottom: none; }
+  .profil-page-header { flex-direction: column; }
+  .btn-simpan-profil  { width: 100%; justify-content: center; }
+}
