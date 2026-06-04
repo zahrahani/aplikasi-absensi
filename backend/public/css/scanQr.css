@@ -1,0 +1,286 @@
+ *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+
+    .title-page{
+      color:#bdbdbd;
+      margin-bottom:15px;
+      font-size:18px;
+    }
+
+    .container{
+      width:100%;
+      background:#f5f5f5;
+      height: 100vh;
+      overflow:autor;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    /* HEADER */
+    .header{
+      background:#2200b8;
+      color:white;
+      padding:22px 28px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .company{
+      font-size:24px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    .header-right{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      font-size:13px;
+    }
+
+    .clock{
+      background:white;
+      color:#222;
+      padding:6px 12px;
+      border-radius:8px;
+      font-weight:bold;
+    }
+
+    /* CONTENT */
+    .content{
+      padding:25px;
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:25px;
+    }
+
+    /* LEFT CARD */
+    .left-card{
+      background:white;
+      border-radius:18px;
+      padding:30px;
+      min-height:500px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 3px 10px rgba(0,0,0,0.04);
+    }
+
+    .scanner-label{
+      color:#bdbdbd;
+      font-size:12px;
+      margin-bottom:10px;
+      letter-spacing:1px;
+    }
+
+    .scan-title{
+      font-size:24px;
+      font-weight:bold;
+      margin-bottom:5px;
+      text-align:center;
+    }
+
+    .scan-subtitle{
+      color:#888;
+      font-size:13px;
+      margin-bottom:25px;
+    }
+
+    .qr-wrapper{
+      background:#fff;
+      border:2px solid #ddd;
+      padding:10px;
+      border-radius:10px;
+    }
+
+    #qrImage{
+      width:220px;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .progress{
+      width:220px;
+      height:6px;
+      background:#ddd;
+      margin-top:20px;
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    .progress-bar{
+      width:100%;
+      height:100%;
+      background:#00c27a;
+      animation:countdown 5s linear infinite;
+      transform-origin:left;
+    }
+
+    @keyframes countdown{
+      from{
+        width:100%;
+      }
+      to{
+        width:0%;
+      }
+    }
+
+    .expired-text{
+      margin-top:10px;
+      color:#777;
+      font-size:12px;
+    }
+
+    .info-box{
+      width:100%;
+      margin-top:30px;
+      background:#f2f7ff;
+      border-radius:14px;
+      padding:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .info-item{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .info-label{
+      font-size:11px;
+      color:#777;
+    }
+
+    .info-value{
+      font-size:13px;
+      font-weight:bold;
+    }
+
+    .status{
+      background:#00d26a;
+      color:white;
+      padding:5px 12px;
+      border-radius:8px;
+      font-size:12px;
+      font-weight:bold;
+    }
+
+    /* RIGHT SIDE */
+    .right-side{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.04);
+    }
+
+    .card-title{
+      font-size:13px;
+      font-weight:bold;
+      margin-bottom:18px;
+    }
+
+    .recap-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .recap-item{
+      background:#f7f7f7;
+      border-radius:10px;
+      padding:15px;
+      text-align:center;
+    }
+
+    .recap-number{
+      font-size:22px;
+      font-weight:bold;
+      margin-bottom:5px;
+    }
+
+    .recap-label{
+      font-size:12px;
+      color:#666;
+    }
+
+    .green{ color:#00b56a; }
+    .red{ color:#ff4b4b; }
+    .blue{ color:#3485ff; }
+    .orange{ color:#ff9f1a; }
+
+    /* SCAN LIST */
+    .scan-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      border-bottom:1px solid #eee;
+    }
+
+    .scan-left{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .avatar{
+      width:35px;
+      height:35px;
+      border-radius:10px;
+      background:#ff6b6b;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:bold;
+    }
+
+    .scan-name{
+      font-size:13px;
+      font-weight:bold;
+    }
+
+    .scan-time{
+      font-size:11px;
+      color:#888;
+      margin-top:3px;
+    }
+
+    .badge{
+      padding:5px 10px;
+      border-radius:8px;
+      font-size:11px;
+      color:white;
+      font-weight:bold;
+    }
+
+    .success{
+      background:#00c26f;
+    }
+
+    .warning{
+      background:#ffb020;
+    }
+
+    @media(max-width:900px){
+      .content{
+        grid-template-columns:1fr;
+      }
+    }

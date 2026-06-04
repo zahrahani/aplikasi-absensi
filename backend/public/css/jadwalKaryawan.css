@@ -1,0 +1,594 @@
+/* ═══════════════════════════════════════════
+   jadwalKaryawan.css – CV. NAFIHAKA Creative
+   Halaman Pengaturan Jadwal Shift Karyawan
+   Konsisten dengan: karyawan.css, rekap.css,
+   validasi.css (variabel, topbar, sidebar sama)
+════════════════════════════════════════════ */
+
+/* ── CSS Variables (identik dengan karyawan.css) ── */
+:root {
+  --navy:      #2A2FA8;
+  --navy-dark: #1e2280;
+  --green:     #3DB562;
+  --green-bg:  #e8f8ee;
+  --blue-light:#EEF1FF;
+  --text:      #1a1a2e;
+  --muted:     #6b7280;
+  --border:    #e2e5f0;
+  --white:     #ffffff;
+  --danger:    #dc3545;
+  --sidebar-w: 220px;
+  --topbar-h:  56px;
+}
+
+/* ════════════════════════════════════════════
+   PAGE HEADER
+════════════════════════════════════════════ */
+.jadwal-header-section {
+  background: #fff;
+  border: 2px solid var(--navy);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.page-subtitle {
+  font-size: .875rem;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+/* ════════════════════════════════════════════
+   TOOLBAR
+════════════════════════════════════════════ */
+.toolbar { flex-wrap: wrap; }
+
+.search-box {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  gap: 8px;
+  transition: border-color .2s;
+  display: flex;
+  align-items: center;
+}
+.search-box:focus-within { border-color: var(--navy); }
+.search-icon { color: var(--muted); font-size: .95rem; }
+.search-input {
+  border: none;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .875rem;
+  color: var(--text);
+  background: transparent;
+  min-width: 180px;
+}
+
+.btn-filter {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.btn-filter:hover,
+.btn-filter:focus { border-color: var(--navy); outline: none; }
+
+/* ════════════════════════════════════════════
+   STAT CARDS SHIFT
+════════════════════════════════════════════ */
+.shift-stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.shift-stat-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: center;
+  animation: fadeUp .4s ease both;
+}
+
+.shift-stat-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.shift-stat-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ════════════════════════════════════════════
+   TABEL JADWAL
+════════════════════════════════════════════ */
+.jadwal-table-wrap {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  animation: fadeUp .4s ease both;
+}
+
+.jadwal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header tabel */
+.jadwal-table thead tr {
+  background: var(--navy);
+  color: #fff;
+}
+
+.jadwal-table thead th {
+  padding: 13px 16px;
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+
+.jadwal-table thead th:first-child { border-radius: 0; }
+
+/* Baris karyawan */
+.jadwal-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+  animation: fadeUp .3s ease both;
+}
+
+.jadwal-table tbody tr:last-child { border-bottom: none; }
+.jadwal-table tbody tr:hover { background: #fafbff; }
+
+.jadwal-table tbody td {
+  padding: 14px 16px;
+  vertical-align: middle;
+  font-size: .875rem;
+  color: var(--text);
+}
+
+/* Kolom karyawan */
+.karyawan-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jadwal-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+  overflow: hidden;
+}
+
+.jadwal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Warna avatar per divisi — identik dengan karyawan.css */
+.avatar-hrd       { background: #fce4ec; border: 2px solid #f06292; color: #c2185b; }
+.avatar-it        { background: #e3f2fd; border: 2px solid #42a5f5; color: #1565c0; }
+.avatar-finance   { background: #e8f5e9; border: 2px solid #66bb6a; color: #2e7d32; }
+.avatar-marketing { background: #fff8e1; border: 2px solid #ffa726; color: #e65100; }
+.avatar-operations{ background: #f3e5f5; border: 2px solid #ab47bc; color: #6a1b9a; }
+.avatar-design    { background: #e0f7fa; border: 2px solid #26c6da; color: #00695c; }
+.avatar-sales     { background: #fbe9e7; border: 2px solid #ff7043; color: #bf360c; }
+.avatar-default  { background: var(--blue-light); border: 2px solid var(--navy); color: var(--navy); }
+
+
+.karyawan-nama {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.karyawan-nip {
+  font-size: .72rem;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+}
+
+/* Badge divisi */
+.divisi-badge {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--navy);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* Chip shift */
+.shift-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: .8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.shift-pagi   { background: #fff8e1; color: #e65100; border: 1.5px solid #ffcc02; }
+.shift-sore   { background: #e8f4fd; color: #1565c0; border: 1.5px solid #90caf9; }
+.shift-malam  { background: #ede7f6; color: #4527a0; border: 1.5px solid #b39ddb; }
+.shift-kosong {
+  background: #f5f5f5;
+  color: var(--muted);
+  border: 1.5px dashed var(--border);
+  font-style: italic;
+}
+
+.shift-chip-time {
+  font-size: .7rem;
+  font-weight: 500;
+  opacity: .75;
+}
+
+/* Badge status shift */
+.status-aktif {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fdeaea;
+  color: #e03b3b;
+  border: 1.5px solid #fca5a5;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.status-selesai {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1.5px solid #86efac;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.status-belum {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f5f5f5;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* Tombol ubah shift */
+.btn-ubah-shift {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--blue-light);
+  color: var(--navy);
+  border: 1.5px solid var(--navy);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+.btn-ubah-shift:hover {
+  background: var(--navy);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-ubah-shift.locked {
+  opacity: .5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════
+   EMPTY STATE
+════════════════════════════════════════════ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+.empty-icon {
+  font-size: 3rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 12px;
+}
+.empty-text {
+  font-size: .95rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ════════════════════════════════════════════
+   LOADING SKELETON
+════════════════════════════════════════════ */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ════════════════════════════════════════════
+   MODAL ATUR SHIFT
+════════════════════════════════════════════ */
+.modal-custom {
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 20px 60px rgba(42,47,168,.18);
+}
+
+/* Info karyawan di modal */
+.modal-karyawan-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--blue-light);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.modal-karyawan-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+}
+
+.modal-karyawan-nama {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.modal-karyawan-meta {
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+/* Info shift saat ini */
+.modal-shift-current {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-shift-current-label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Alert terkunci */
+.alert-locked {
+  background: #fdeaea;
+  border: 1.5px solid #fca5a5;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: #991b1b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* Grid pilihan shift */
+.shift-option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.shift-option-card {
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s, transform .15s;
+  text-align: center;
+}
+
+.shift-option-card:hover {
+  border-color: var(--navy);
+  background: var(--blue-light);
+  transform: translateY(-1px);
+}
+
+.shift-option-card.selected {
+  border-color: var(--navy);
+  background: var(--blue-light);
+  box-shadow: 0 0 0 3px rgba(42,47,168,.1);
+}
+
+.shift-option-card.libur-option { grid-column: span 2; }
+
+.shift-option-name {
+  font-size: .9rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.shift-option-time {
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+.shift-option-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.badge-pagi   { background: #fff8e1; color: #e65100; }
+.badge-sore   { background: #e8f4fd; color: #1565c0; }
+.badge-malam  { background: #ede7f6; color: #4527a0; }
+.badge-libur  { background: #f5f5f5; color: var(--muted); }
+
+/* Tombol modal */
+.btn-modal-batal {
+  background: #f4f5fb;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 7px 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-modal-batal:hover { background: var(--border); }
+
+.btn-modal-simpan {
+  background: var(--navy);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 7px 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-modal-simpan:hover  { background: var(--navy-dark); }
+.btn-modal-simpan:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* ════════════════════════════════════════════
+   ANIMASI
+════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .main-content { margin-left: 0; padding: 16px; }
+  .jadwal-table-wrap { overflow-x: auto; }
+  .jadwal-table { min-width: 600px; }
+  .shift-option-grid { grid-template-columns: 1fr; }
+  .shift-option-card.libur-option { grid-column: span 1; }
+  .shift-stat-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+.main-content {
+  margin-left: var(--sidebar-w);
+  padding: 28px 28px 40px;
+  animation: fadeUp .4s ease both;
+}
+
+/* ═══════════════════════════════════════════
+   STAT BOXES (Section 1)
+════════════════════════════════════════════ */
+
+.stat-box {
+  background: var(--blue-light);
+  border-radius: 10px;
+  padding: 18px 16px;
+  text-align: center;
+  height: 100%;
+  transition: transform .2s, box-shadow .2s;
+}
+.stat-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(42,47,168,.12);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-number.green { color: var(--green); }
+
+.stat-label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
